@@ -1,0 +1,22 @@
+.Bar{
+    display: flex;
+    justify-content: space-around;
+    padding: 1vh 0 0 0;
+    margin: 0 0 1vh 0;
+}
+.errInput{
+    border-radius: 0.5vh;
+    border: 1px solid red;
+    width: 6vh;
+    height: 2.5vh;
+}
+.pointInput{
+    width: 6vh;
+    height: 2.5vh;
+    
+}
+.inpBtn{
+    width: 6vh;
+    height: 3.2vh;
+    background: #fff;
+}
