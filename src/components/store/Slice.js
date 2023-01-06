@@ -18,6 +18,11 @@ const slice = createSlice({
             x: 4,
             y: 1,
             z: 5
+        }],
+        kernels:[{
+            id:0,
+            start:1,
+            end:0
         }]
     },
     reducers: {
@@ -30,7 +35,14 @@ const slice = createSlice({
             })
             
         },
-        removeNode(state, action){},
+        removeNode(state, action){
+            console.log(action.payload.id)
+            state.nodes = state.nodes.filter(elem=>{
+                if(elem.id != action.payload.id){
+                    return elem
+                }
+            })
+        },
         changeNode(state, action){
             state.nodes[action.payload.id]= {
                 id:action.payload.id,
@@ -38,11 +50,17 @@ const slice = createSlice({
                 y: action.payload.y,
                 z: action.payload.z
             }
-            console.log(state.nodes[0])
         },
+        addKernel(state, action){
+            state.kernels.push({
+                id: state.kernels.at(-1).id + 1,
+                start: action.payload.start,
+                end: action.payload.end
+            })
+        }
     }
 })
 
-export const {addNode, removeNode, changeNode} = slice.actions;
+export const {addNode, removeNode, changeNode, addKernel} = slice.actions;
 
 export default slice.reducer;

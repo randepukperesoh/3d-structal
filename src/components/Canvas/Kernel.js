@@ -1,9 +1,14 @@
 import React from 'react';
 import * as THREE from 'three'
 
-export default function Kernel ({points}){
-    
+export default function Kernel ({startEnd,points}){
+    let [id, start, end] = Object.values(startEnd)
+
     let nodes = points;
+    nodes = nodes.filter(elem => {
+        return elem[0] == start ?  elem : elem[0] == end ? elem : false
+    })
+
     nodes = nodes.map(elem => {
         return new THREE.Vector3(...elem.slice(1)) 
     })

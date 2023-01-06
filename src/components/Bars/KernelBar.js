@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import './Bars.css';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import { addKernel } from '../store/Slice';
 
 export default function NodeBar() {
     
-    const columnDefs = ([
-        { field: 'ok', maxWidth: 50, checkboxSelection: true},
-        { field: 'id', editable: false, maxWidth: 60 },
-        { field: 'x', editable: false, maxWidth: 60 },
-        { field: 'y', editable: false, maxWidth: 60 },
-        { field: 'z', editable: false, maxWidth: 60 }
-    ])
-    const nodes = useSelector(state => state.nodes.nodes);
-    function c(){
+    let [ start, startSet] = useState(0);
+    let [ end, endSet] = useState(0);
+    
+    const dispatch = useDispatch();
 
-    }
+    //const nodes = useSelector(state => state.nodes.nodes);
+    const kernels = useSelector(state => state.nodes.kernels);    
+
+    const columnDefs = ([
+        { field: 'start', maxWidth: 100, editable: false},
+        { field: 'end', maxWidth: 100, editable: false }
+    ])
+
     return (
         <div>
+            <form className='Bar'>
+                <input defaultValue={0} onChange={(e) => startSet(e.target.value)} className='pointInput'></input>
+                <input defaultValue={0} onChange={(e) => endSet(e.target.value)} className='pointInput'></input>
+                <button type='button' onClick={() => dispatch(addKernel({start, end}))} className='inpBtn'>Add </button>
+            </form>
             <div className="ag-theme-alpine" style={{ width: '100%', height: '40vh' }}>
-                <AgGridReact rowSelection={'multiple'} rowData={nodes} columnDefs={columnDefs}/>
-            </div>
-            <button onClick={c} className='inpBtn'>add</button>
+                <AgGridReact rowSelection={'multiple'} rowData={kernels} columnDefs={columnDefs}/>
+            </div>    
         </div>
     )
 }

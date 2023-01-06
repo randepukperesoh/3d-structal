@@ -1,0 +1,24 @@
+.gridWraper{
+}
+.gridRow{
+    
+    width: 10.8vw;
+}
+.gridHeader{
+    display: flex;
+    justify-content: space-around;
+}
+.row{
+    width: 10.8vw;
+    display: flex;
+    height: 4vh;
+}
+.row input{
+    width: 10.7vw;
+    text-align: center;
+}
+.delBtn{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
