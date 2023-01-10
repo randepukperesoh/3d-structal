@@ -8,13 +8,11 @@ import {useSelector} from 'react-redux'
 export default function Area() {
     const nodes = useSelector(state => state.nodes.nodes);
     const kernels = useSelector(state => state.nodes.kernels)
-    //console.log(Object.values(nodes).map(item => {
-    //    return Object.values(item)
-    //}))
+
     const k = Object.values(nodes).map(item => { return Object.values(item) })
 
     let arrNode = nodes.map(function(dot) {
-        return <Dot key={dot.id} position={[dot.x, dot.y, dot.z]}/>
+        return <Dot key={dot.id} id={dot.id} position={[dot.x, dot.y, dot.z]}/>
     });
     let arrKernel = kernels.map(kernel => {
         return <Kernel key={kernel.id} startEnd={kernel} points={k}/>

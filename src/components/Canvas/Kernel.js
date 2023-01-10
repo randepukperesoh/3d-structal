@@ -6,7 +6,7 @@ export default function Kernel ({startEnd,points}){
 
     let nodes = points;
     nodes = nodes.filter(elem => {
-        return elem[0] == start ?  elem : elem[0] == end ? elem : false
+        return elem[0] === start ?  elem : elem[0] === end ? elem : false
     })
 
     nodes = nodes.map(elem => {

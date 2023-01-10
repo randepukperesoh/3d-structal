@@ -4,17 +4,17 @@ const slice = createSlice({
     name:'nodes',
     initialState:{
         nodes:[{
-            id:0,
+            id:1,
             x: 1,
             y: 5,
             z: 1
         },{
-            id:1,
+            id:2,
             x: 4,
             y: 2,
             z: 1
         },{
-            id:2,
+            id:3,
             x: 4,
             y: 1,
             z: 5
@@ -22,7 +22,7 @@ const slice = createSlice({
         kernels:[{
             id:0,
             start:1,
-            end:0
+            end:2
         }]
     },
     reducers: {
@@ -37,14 +37,14 @@ const slice = createSlice({
         },
         removeNode(state, action){
             console.log(action.payload.id)
-            state.nodes = state.nodes.filter(elem=>{
-                if(elem.id != action.payload.id){
+            state.nodes = state.nodes.filter(elem => {
+                if(elem.id !== action.payload.id) {
                     return elem
                 }
             })
         },
         changeNode(state, action){
-            state.nodes[action.payload.id]= {
+            state.nodes[action.payload.id - 1]= {
                 id:action.payload.id,
                 x: action.payload.x,
                 y: action.payload.y,
