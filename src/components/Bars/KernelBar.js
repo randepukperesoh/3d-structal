@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import './Bars.css';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -7,14 +7,12 @@ import {useSelector, useDispatch} from 'react-redux'
 import { addKernel } from '../store/Slice';
 
 export default function NodeBar() {
-    
+    const kernels = useSelector(state => state.nodes.kernels);  
+
     let [ start, startSet] = useState(0);
     let [ end, endSet] = useState(0);
     
     const dispatch = useDispatch();
-
-    //const nodes = useSelector(state => state.nodes.nodes);
-    const kernels = useSelector(state => state.nodes.kernels);    
 
     const columnDefs = ([
         { field: 'start', maxWidth: 100, editable: false},

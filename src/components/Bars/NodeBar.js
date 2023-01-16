@@ -43,12 +43,15 @@ export default function NodeBar() {
             }
             if (e.colDef.field === 'z'){
                 if(i === e.data.id-1){
-                dispatch(changeNode( {id: e.data.id, x: e.data.x, y: e.data.y, z: e.newValue} ))
+                dispatch(changeNode( {id: e.data.id, x: e.data.x, y: e.data.y, z: e.newValue } ))
                 }
             }
         })
     }
-
+    
+    function push () {
+        dispatch(addNode({x, y, z}))
+    }
 
     return (
         <div>
@@ -56,7 +59,7 @@ export default function NodeBar() {
                 <input onChange={(e) => xSet(e.target.value)} className='pointInput'></input>
                 <input onChange={(e) => ySet(e.target.value)} className='pointInput'></input>
                 <input onChange={(e) => zSet(e.target.value)} className='pointInput'></input>
-                <button type='button' onClick={() => dispatch(addNode({x, y, z}))} className='inpBtn'>Add </button>
+                <button type='button' onClick={() => push()} className='inpBtn'>Add </button>
             </form>
             <div className="ag-theme-alpine" style={{ width: '100%', height: '80vh' }}>
                 <AgGridReact

@@ -1,20 +1,28 @@
 import React from 'react';
 import * as THREE from 'three'
+import {useSelector} from 'react-redux'
 
-export default function Kernel ({startEnd,points}){
+export default function Kernel ({startEnd}){
     let [id, start, end] = Object.values(startEnd)
 
-    let nodes = points;
-    nodes = nodes.filter(elem => {
-        return elem[0] === start ?  elem : elem[0] === end ? elem : false
+    const points = useSelector(state => state.nodes.nodes)
+    
+    let nodes = points.filter( point => {
+        if(point.id === start){
+            return point
+        }
+        if(point.id === end) {
+            return point
+        }
     })
 
-    nodes = nodes.map(elem => {
-        return new THREE.Vector3(...elem.slice(1)) 
+    nodes = nodes.map( node => {
+        node = Object.values(node)
+        return new THREE.Vector3(...node.slice(1))
     })
 
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(nodes)
-
+    
     return(
         <group position={[0, 0, 0]}>
             <line geometry={lineGeometry}>
