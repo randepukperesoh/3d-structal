@@ -52,9 +52,9 @@ const slice = createSlice({
         addNode(state, action){
             state.nodes.push({
                 id:state.nodes.at(-1).id+1,
-                x: action.payload.x / 10,
-                y: action.payload.y / 10,
-                z: action.payload.z / 10
+                x: action.payload.x,
+                y: action.payload.y,
+                z: action.payload.z
             })
             
         },
