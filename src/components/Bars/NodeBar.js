@@ -65,6 +65,8 @@ export default function NodeBar() {
                 <button onClick={() => {dispatch(changeConfig( {mouseType : 'node'} ) ) }}>node</button>
                 <button onClick={() => {dispatch(changeConfig( {mouseType : 'camera'} ) ) } }>camera</button>
                 <button onClick={() => {dispatch(changeConfig( {mouseType : 'kernel'} ) ) } }>kernel</button>
+                <button onClick={() => {dispatch(changeConfig( {mouseType : 'square'} ) ) } }>square</button>
+                <button onClick={() => {dispatch(changeConfig( {mouseType : 'triangle'} ) ) } }>triangle</button>
             </div>
             <div className="ag-theme-alpine" style={{ width: '100%', height: '80vh' }}>
                 <AgGridReact

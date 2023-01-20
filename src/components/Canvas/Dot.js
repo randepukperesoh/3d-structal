@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Html } from "@react-three/drei";
 import { useSelector, useDispatch } from 'react-redux'
 import { selectionNode, addKernel } from '../store/Slice';
 
