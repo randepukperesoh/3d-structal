@@ -45,11 +45,16 @@ const slice = createSlice({
         config:{
             yzGrid: false,
             yxGrid: false,
-            meshDivisions: 10
+            meshDivisions: 10,
+            mouseType: 'camera'
+        },
+        selectedNode: {
+            node: null
         }
     },
     reducers: {
         addNode(state, action){
+            
             state.nodes.push({
                 id:state.nodes.at(-1).id+1,
                 x: action.payload.x,
@@ -85,10 +90,16 @@ const slice = createSlice({
             state.config.meshDivisions = action.payload.meshDivisions
             state.config.yzGrid = action.payload.yzGrid
             state.config.yxGrid = action.payload.yxGrid
+            state.config.mouseType = action.payload.mouseType
+        },
+        selectionNode(state, action){
+            
+            state.selectedNode.node = action.payload.id;
+            console.log(state.selectedNode.node)
         }
     }
 })
 
-export const {addNode, removeNode, changeNode, addKernel, changeConfig} = slice.actions;
+export const {addNode, removeNode, changeNode, addKernel, changeConfig, selectionNode} = slice.actions;
 
 export default slice.reducer;
