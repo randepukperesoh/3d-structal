@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Bars.css';
 import {useSelector, useDispatch} from 'react-redux'
-import {addNode , changeNode, changeConfig} from '../store/Slice';
+import {addNode , changeNode, changeConfigMouseType} from '../store/Slice';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -62,11 +62,11 @@ export default function NodeBar() {
                 <button type='button' onClick={() => push()} className='inpBtn'>Add </button>
             </form>
             <div>
-                <button onClick={() => {dispatch(changeConfig( {mouseType : 'node'} ) ) }}>node</button>
-                <button onClick={() => {dispatch(changeConfig( {mouseType : 'camera'} ) ) } }>camera</button>
-                <button onClick={() => {dispatch(changeConfig( {mouseType : 'kernel'} ) ) } }>kernel</button>
-                <button onClick={() => {dispatch(changeConfig( {mouseType : 'square'} ) ) } }>square</button>
-                <button onClick={() => {dispatch(changeConfig( {mouseType : 'triangle'} ) ) } }>triangle</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'node'} ) ) }}>node</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'camera'} ) ) } }>camera</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'kernel'} ) ) } }>kernel</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'square'} ) ) } }>square</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'triangle'} ) ) } }>triangle</button>
             </div>
             <div className="ag-theme-alpine" style={{ width: '100%', height: '80vh' }}>
                 <AgGridReact

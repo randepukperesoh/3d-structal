@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import NodeBar from '../Bars/NodeBar';
 import KernelBar from '../Bars/KernelBar'
-import ParamsBar from '../Bars/paramsBar';
+import ParamsBar from '../Bars/ParamsBar';
 import Area from '../Canvas/Area'
 import './Main.css'
 
 
 function Main() {
-    let [paragraph, setParagraph] = useState('params');
+    let [paragraph, setParagraph] = useState('node');
 
     return(
         <div>

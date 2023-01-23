@@ -44,17 +44,17 @@ const slice = createSlice({
         config:{
             yzGrid: false,
             yxGrid: false,
+            camera: true,
             meshDivisions: 10,
-            mouseType: 'camera',
-            camera: false
+            mouseType: 'camera'
+            
         },
         selectedNode: {
             node: null
         }
     },
     reducers: {
-        addNode(state, action){
-            
+        addNode(state, action) {
             state.nodes.push({
                 id:state.nodes.at(-1).id+1,
                 x: action.payload.x,
@@ -63,14 +63,14 @@ const slice = createSlice({
             })
             
         },
-        removeNode(state, action){
+        removeNode(state, action) {
             state.nodes = state.nodes.filter(elem => {
                 if(elem.id !== action.payload.id) {
                     return elem
                 }
             })
         },
-        changeNode(state, action){
+        changeNode(state, action) {
             state.nodes[action.payload.id - 1]= {
                 id:action.payload.id,
                 x: action.payload.x,
@@ -78,19 +78,27 @@ const slice = createSlice({
                 z: action.payload.z
             }
         },
-        addKernel(state, action){
+        addKernel(state, action) {
             state.kernels.push({
                 id: state.kernels.at(-1).id + 1,
                 start: Number(action.payload.start),
                 end: Number(action.payload.end)
             })
         },
-        changeConfig( state, action){
-            state.config.meshDivisions = action.payload.meshDivisions
-            state.config.yzGrid = action.payload.yzGrid
-            state.config.yxGrid = action.payload.yxGrid
-            state.config.mouseType = action.payload.mouseType
-            state.config.camera = action.payload.camera
+        changeConfigGridYX( state, action) {
+            state.config.yxGrid = action.payload.yxGrid;
+        },
+        changeConfigGridYZ( state, action) {
+            state.config.yzGrid = action.payload.yzGrid;
+        },
+        changeConfigMeshSize( state, action ) {
+            state.config.meshDivisions = action.payload.meshDivisions;
+        },
+        changeConfigMouseType ( state, action ) {
+            state.config.mouseType = action.payload.mouseType;
+        },
+        changeConfigCamera ( action, state ) {
+            state.config.camera = action.payload.camera;
         },
         selectionNode(state, action){
             state.selectedNode.node = action.payload.id;
@@ -98,6 +106,6 @@ const slice = createSlice({
     }
 })
 
-export const {addNode, removeNode, changeNode, addKernel, changeConfig, selectionNode} = slice.actions;
+export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX, changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, changeConfigCamera, selectionNode} = slice.actions;
 
 export default slice.reducer;
