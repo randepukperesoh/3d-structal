@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Dot from './Dot'
 import Kernel from './Kernel';
@@ -12,6 +12,7 @@ export default function Area() {
     const kernels = useSelector(state => state.nodes.kernels)
     const config = useSelector(state => state.nodes.config)
     const dispatch = useDispatch();
+
 
     let arrKernels = kernels.map( ( kernel ) => <Kernel key = { kernel.id + 'K' } startEnd = { kernel }/>)
 

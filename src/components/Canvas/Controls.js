@@ -8,6 +8,7 @@ const Controls = () => {
   const { camera, gl } = useThree();
   return (
     <orbitControls
+      enabled={true}
       enableZoom={true}
       args={[camera, gl.domElement]}
     />

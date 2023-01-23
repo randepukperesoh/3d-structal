@@ -29,7 +29,7 @@ export default function NodeBar() {
     ])
 
     function setRow(e) {
-        console.log(e)
+        
         nodes.forEach( (node, i) => {
             if (e.colDef.field === 'x'){
                 if(i === e.data.id-1){

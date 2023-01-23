@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils'
 
 const slice = createSlice({
     name:'nodes',
@@ -46,7 +45,8 @@ const slice = createSlice({
             yzGrid: false,
             yxGrid: false,
             meshDivisions: 10,
-            mouseType: 'camera'
+            mouseType: 'camera',
+            camera: false
         },
         selectedNode: {
             node: null
@@ -64,7 +64,6 @@ const slice = createSlice({
             
         },
         removeNode(state, action){
-            console.log(action.payload.id)
             state.nodes = state.nodes.filter(elem => {
                 if(elem.id !== action.payload.id) {
                     return elem
@@ -91,11 +90,10 @@ const slice = createSlice({
             state.config.yzGrid = action.payload.yzGrid
             state.config.yxGrid = action.payload.yxGrid
             state.config.mouseType = action.payload.mouseType
+            state.config.camera = action.payload.camera
         },
         selectionNode(state, action){
-            
             state.selectedNode.node = action.payload.id;
-            console.log(state.selectedNode.node)
         }
     }
 })
