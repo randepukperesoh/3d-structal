@@ -13,6 +13,7 @@ export default function Area() {
     const config = useSelector(state => state.nodes.config)
     const dispatch = useDispatch();
 
+    
 
     let arrKernels = kernels.map( ( kernel ) => <Kernel key = { kernel.id + 'K' } startEnd = { kernel }/>)
 
@@ -70,7 +71,7 @@ export default function Area() {
 
     return(
         <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [7, 5, 0] }}>
-            <Controls/>
+            <Controls />
             <ambientLight intensity={0.5}/>
             <pointLight position={[10, 10, 10]}/>
             <mesh position={[0, -0.0001, 0]} onClick={(e) => createNode(e)}>

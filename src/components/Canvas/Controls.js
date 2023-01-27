@@ -7,7 +7,6 @@ extend({ OrbitControls });
 
 const Controls = () => {
   const cameraState = useSelector(state => state.nodes.config);
-  console.log(cameraState);
   const { camera, gl } = useThree();
   return (
     <orbitControls
