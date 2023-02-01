@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NodeBar from '../Bars/NodeBar';
 import KernelBar from '../Bars/KernelBar'
 import ParamsBar from '../Bars/ParamsBar';
@@ -8,6 +8,13 @@ import './Main.css'
 
 function Main() {
     let [paragraph, setParagraph] = useState('node');
+    let url = "http://localhost:3001/getData";
+
+    useEffect(() => {
+        fetch(url, {mode:'cors'}) 
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+    }, [url])
 
     return(
         <div>

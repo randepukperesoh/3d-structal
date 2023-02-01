@@ -6,7 +6,7 @@ import React from "react";
 extend({ OrbitControls });
 
 const Controls = () => {
-  const cameraState = useSelector(state => state.nodes.config);
+  const cameraState = useSelector(state => state.nodes.config.camera);
   const { camera, gl } = useThree();
   return (
     <orbitControls

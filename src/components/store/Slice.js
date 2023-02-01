@@ -97,7 +97,8 @@ const slice = createSlice({
         changeConfigMouseType ( state, action ) {
             state.config.mouseType = action.payload.mouseType;
         },
-        changeConfigCamera ( action, state ) {
+        changeConfigCamera ( state, action ) {
+            console.log(state)
             state.config.camera = action.payload.camera;
         },
         selectionNode(state, action){

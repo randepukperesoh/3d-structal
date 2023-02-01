@@ -16,9 +16,9 @@ export default function Dot({ cam, pos , id }){
     const [contextMenu, setContextMenu] = useState(false);
 
     const bindDotPos = useGesture({
-        //onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
+        onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
         onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
-        //onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
+        onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
         onClick: config.mouseType === 'kernel' ? createKernel : null,
         onContextMenu:(e) => setContextMenu( !contextMenu )
     })
