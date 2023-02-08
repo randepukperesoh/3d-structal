@@ -8,13 +8,12 @@ import './Main.css'
 
 function Main() {
     let [paragraph, setParagraph] = useState('node');
-    let url = "http://localhost:3001/getData";
-
-    useEffect(() => {
-        fetch(url, {mode:'cors'}) 
-        .then((res) => res.json())
-        .then((res) => console.log(res))
-    }, [url])
+    //let url = "http://localhost:3001/getData";
+    //useEffect(() => {
+    //    fetch(url, {mode:'cors'}) 
+    //    .then((res) => res.json())
+    //    .then((res) => console.log(res))
+    //}, [url])
 
     return(
         <div>
