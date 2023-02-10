@@ -3,27 +3,28 @@ import {createSlice} from '@reduxjs/toolkit'
 const slice = createSlice({
     name:'nodes',
     initialState:{
-        nodes:[{
-            id:1,
-            x: 1,
-            y: 1,
-            z: 1
-        },{
-            id:2,
-            x: 1,
-            y: 1,
-            z: 0
-        },{
-            id:3,
-            x: 1,
-            y: 0,
-            z: 1
-        },{
-            id:4,
-            x: 1,
-            y: 0,
-            z: 0
-        }],
+        nodes:[
+        //    {
+        //    id:1,
+        //    x: 1,
+        //    y: 1,
+        //    z: 1
+        //},{
+        //    id:2,
+        //    x: 1,
+        //    y: 1,
+        //    z: 0
+        //},{
+        //    id:3,
+        //    x: 1,
+        //    y: 0,
+        //    z: 1
+        //},{
+        //    id:4,
+        //    x: 1,
+        //    y: 0,
+        //    z: 0}
+        ],
         kernels:[{
             id:0,
             start:1,
@@ -55,13 +56,8 @@ const slice = createSlice({
     },
     reducers: {
         addNode(state, action) {
-            state.nodes.push({
-                id:state.nodes.at(-1).id+1,
-                x: action.payload.x,
-                y: action.payload.y,
-                z: action.payload.z
-            })
-            
+            console.log(action.payload)
+            state.nodes.push(action.payload)
         },
         removeNode(state, action) {
             state.nodes = state.nodes.filter(elem => {
@@ -103,10 +99,15 @@ const slice = createSlice({
         },
         selectionNode(state, action){
             state.selectedNode.node = action.payload.id;
+        },
+        selectNode( state, action ){
+            state.nodes[action.payload.id].isSelected = !state.nodes[action.payload.id].isSelected;
         }
     }
 })
 
-export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX, changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, changeConfigCamera, selectionNode} = slice.actions;
+export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
+    changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, 
+    changeConfigCamera, selectionNode, selectNode } = slice.actions;
 
 export default slice.reducer;
