@@ -25,23 +25,25 @@ const slice = createSlice({
         //    y: 0,
         //    z: 0}
         ],
-        kernels:[{
-            id:0,
-            start:1,
-            end:2
-        },{
-            id:1,
-            start:4,
-            end:3
-        },{
-            id:2,
-            start:2,
-            end:4
-        },{
-            id:3,
-            start:1,
-            end:3
-        }],
+        kernels:[
+        //    {
+        //    id:0,
+        //    start:1,
+        //    end:2
+        //},{
+        //    id:1,
+        //    start:4,
+        //    end:3
+        //},{
+        //    id:2,
+        //    start:2,
+        //    end:4
+        //},{
+        //    id:3,
+        //    start:1,
+        //    end:3
+        //}
+    ],
         config:{
             yzGrid: false,
             yxGrid: false,
@@ -50,13 +52,16 @@ const slice = createSlice({
             mouseType: 'camera'
             
         },
+        selectedObjects: {
+            node: [],
+            kernels: [1]
+        },
         selectedNode: {
             node: null
         }
     },
     reducers: {
         addNode(state, action) {
-            console.log(action.payload)
             state.nodes.push(action.payload)
         },
         removeNode(state, action) {
@@ -101,13 +106,24 @@ const slice = createSlice({
             state.selectedNode.node = action.payload.id;
         },
         selectNode( state, action ){
-            state.nodes[action.payload.id].isSelected = !state.nodes[action.payload.id].isSelected;
+            state.nodes.map( (node, i) => {
+                if(node.id !== action.payload.id){
+                   node.isSelected = false
+                }
+            })
+            state.nodes[action.payload.id].isSelected = !state.nodes[action.payload.id].isSelected
+        },
+        shiftSelect( state, action ) {
+            
+            if (action.payload.e.shiftKey) {
+              state.selectedObjects.node.push(action.payload.id)
+            } //state.selectedObjects.
         }
     }
 })
 
 export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
     changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, 
-    changeConfigCamera, selectionNode, selectNode } = slice.actions;
+    changeConfigCamera, selectionNode, selectNode, shiftSelect } = slice.actions;
 
 export default slice.reducer;
