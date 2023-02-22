@@ -6,7 +6,7 @@ import Kernel from './Kernel';
 import Controls from './Controls'
 import GridPlane from './GridPlane'
 import { useSelector, useDispatch } from 'react-redux'
-import { addKernel, addNode, selectNode, shiftSelect } from '../store/Slice';
+import { addNode, selectNode } from '../store/Slice';
 import html2canvas from "html2canvas"
 
 export default function Area() {
@@ -14,34 +14,38 @@ export default function Area() {
     const kernels = useSelector(state => state.nodes.kernels)
     const config = useSelector(state => state.nodes.config)
     const dispatch = useDispatch();
-
+    
     const cnvs = useRef(null);
     
-    class Node{
-        constructor(x, z) {
-            this.id = (nodes.at(-1) ? nodes.at(-1).id + 1 : 0);
-            this.x = x;
-            this.z = z;
-            this.y = 0;
-            this.isSelected = false;
-        }
-        selectF (isSelected) {
-            this.isSelected = !isSelected;
-        }
-        select(id) {
-            dispatch(selectNode( {id: id} ));
-        }
-    }
+    //class Node{
+    //    constructor(x, z) {
+    //        this.id = (nodes.at(-1) ? nodes.at(-1).id + 1 : 0);
+    //        this.x = x;
+    //        this.z = z;
+    //        this.y = 0;
+    //        this.isSelected = false;
+    //    }
+    //    select(id) {
+    //        dispatch(selectNode( {id: id} ));
+    //    }
+    //}
 
+    //console.log(nodes[0].isSelected)
     //useEffect( () => {
     //    fetch('http://localhost:8080/')
     //    .then((response) => response.json())
     //    .then((data) => console.log(data));
     //}, [])
 
-    let arrKernels = kernels.map( ( kernel ) => <Kernel 
-        key = { kernel.id + 'K' } 
-        startEnd = { kernel }/>
+    let arrKernels = kernels.map( ( kernel ) =>
+        <Kernel 
+            onClick={(e) => dispatch(selectNode({ id: kernel.id, e: e, type: 'kernel' })) }
+            key = { kernel.id + 'K' } 
+            id ={ kernel.id }
+            start = { kernel.start}
+            end = { kernel.end }
+            isSelected = {kernel.isSelected}
+        />
     )
     
     let arrNode  = nodes.map( ( node ) =>  <Dot 
@@ -52,16 +56,6 @@ export default function Area() {
         selectFunc = {node.select}
         /> 
         )
-
-    //arrNode = nodes.map( (node) => <Dot 
-    //    key = { node.id }
-    //    id = { node.id }
-    //    pos = { [ node.x, node.y, node.z ] }
-    //    select = {node.isSelected}
-    //    selectFunc = {node.select}
-    //    /> 
-    //)
-    
     
     async function handleDownloadImage () {
         const canvas = await html2canvas(cnvs.current),
@@ -80,7 +74,7 @@ export default function Area() {
         if( config.mouseType === 'node' ) {
             let x = Math.round(e.point.x);
             let z = Math.round(e.point.z);
-            dispatch( addNode( new Node(x, z) ) )
+            dispatch(addNode({x: x, z: z}))
         }
     
         //if (config.mouseType === 'square'){
@@ -129,13 +123,13 @@ export default function Area() {
     //onClick={() => handleDownloadImage()}
 
     return(
-        <Canvas gl={{ preserveDrawingBuffer: true }} 
+        <Canvas
+            gl={{ preserveDrawingBuffer: true }} 
             ref={cnvs} 
             camera={{ fov: 75, near: 0.1, 
-            far: 1000, position: [7, 5, 0] }
+            far: 1000, position: [7, 5, 0] }}
+            >
             
-            
-        }>
             <Controls />
             <ambientLight intensity={0.5}/>
             <pointLight position={[10, 10, 10]}/>

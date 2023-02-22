@@ -1,24 +1,32 @@
 .Header{
-    display: flex;
-    height: 50px;
+    display: block;
+    height: 98vh;
+    width: 50px;
     background-color: #0dcaf0;
 }
 .HeaderTab{
     width: max-content;
-    margin: auto 1vh auto 0;
+    margin: 0 auto;
     align-items: center;
 }
 .sideBar{
-    width: 35vh;
+    width: 30vh;
     height: 90vh;
-    position: absolute;
     top: 50px;
     left: 0;
+    margin: 0 10px 0 10px;
     background-color:#f8f9fa;
+    display: flex;
 }
 .area{
-    margin: 0 0 0 35vh;
-    width: 110vh;
-    height: 90vh;
+    max-width: 1920px;
+    max-height: 850px;
     background: rgb(219, 219, 219);
+}
+.main{
+    display: flex;
+}
+.closeTab{
+    position: absolute;
+    bottom: 30px;
 }

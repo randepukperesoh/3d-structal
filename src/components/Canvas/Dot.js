@@ -1,15 +1,16 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, removeNode, shiftSelect } from '../store/Slice';
+import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, removeNode } from '../store/Slice';
 import { useGesture } from '@use-gesture/react';
 import { Html } from "@react-three/drei";
 import { Icon } from '@iconify/react';
 import './Dot.css'
 
-export default function Dot({ pos , id, select, selectFunc }){
-    
+export default function Dot({ pos , id, select }){
+
     const selectedNode = useSelector( state => state.nodes.selectedNode )
     const config = useSelector( state => state.nodes.config )
+
     const dispatch = useDispatch();
 
     const [position, setPosition] = useState( pos );
@@ -20,14 +21,13 @@ export default function Dot({ pos , id, select, selectFunc }){
         onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
         onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
         onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        onClick: (e) =>  /*config.mouseType === 'kernel' ? createKernel : selectFunc(id)*/ dispatch( shiftSelect({ e: e, id: id })),
+        onClick: (e) => config.mouseType === 'kernel' ? createKernel : dispatch( selectNode({ e: e, id: id, type: 'node'})),
         onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
     useEffect( () => { setPosition( pos ) }, [ pos ])
 
-    function createKernel (e) {
-        console.log(e)
+    function createKernel () {
         if (config.mouseType === 'kernel') {
             dispatch(selectionNode({id: id}))
             if( (selectedNode !== id) & (selectedNode !== null) ) {

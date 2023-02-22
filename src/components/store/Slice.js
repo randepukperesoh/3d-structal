@@ -4,45 +4,49 @@ const slice = createSlice({
     name:'nodes',
     initialState:{
         nodes:[
-        //    {
-        //    id:1,
-        //    x: 1,
-        //    y: 1,
-        //    z: 1
-        //},{
-        //    id:2,
-        //    x: 1,
-        //    y: 1,
-        //    z: 0
-        //},{
-        //    id:3,
-        //    x: 1,
-        //    y: 0,
-        //    z: 1
-        //},{
-        //    id:4,
-        //    x: 1,
-        //    y: 0,
-        //    z: 0}
+            {
+            id:0,
+            x: 1,
+            y: 1,
+            z: 1,
+            isSelected: false
+        },{
+            id:1,
+            x: 1,
+            y: 1,
+            z: 0,
+            isSelected: false
+        },{
+            id:2,
+            x: 1,
+            y: 0,
+            z: 1,
+            isSelected: false
+        },{
+            id:3,
+            x: 1,
+            y: 0,
+            z: 0,
+            isSelected: false
+        }
         ],
         kernels:[
-        //    {
-        //    id:0,
-        //    start:1,
-        //    end:2
-        //},{
-        //    id:1,
-        //    start:4,
-        //    end:3
-        //},{
-        //    id:2,
-        //    start:2,
-        //    end:4
-        //},{
-        //    id:3,
-        //    start:1,
-        //    end:3
-        //}
+            {
+            id:0,
+            start:0,
+            end:1,
+            isSelected: false
+        },{
+            id:1,
+            start:1,
+            end:3,
+            isSelected: false
+        },{
+            id:2,
+            start:0,
+            end:2,
+            isSelected: false
+        }
     ],
         config:{
             yzGrid: false,
@@ -62,7 +66,14 @@ const slice = createSlice({
     },
     reducers: {
         addNode(state, action) {
-            state.nodes.push(action.payload)
+            state.nodes.push({
+                //action.payload
+                id: state.nodes.at(-1) ? state.nodes.at(-1).id + 1 : 0,
+                x: action.payload.x,
+                y: 0,
+                z: action.payload.z,
+                isSelected: false
+            })
         },
         removeNode(state, action) {
             state.nodes = state.nodes.filter(elem => {
@@ -99,31 +110,38 @@ const slice = createSlice({
             state.config.mouseType = action.payload.mouseType;
         },
         changeConfigCamera ( state, action ) {
-            console.log(state)
             state.config.camera = action.payload.camera;
         },
-        selectionNode(state, action){
+        selectionNode(state, action) {
             state.selectedNode.node = action.payload.id;
         },
-        selectNode( state, action ){
-            state.nodes.map( (node, i) => {
-                if(node.id !== action.payload.id){
-                   node.isSelected = false
-                }
-            })
-            state.nodes[action.payload.id].isSelected = !state.nodes[action.payload.id].isSelected
-        },
-        shiftSelect( state, action ) {
-            
+        selectNode( state, action ) {
+            console.log( action.payload)
             if (action.payload.e.shiftKey) {
-              state.selectedObjects.node.push(action.payload.id)
-            } //state.selectedObjects.
+                if (action.payload.type == 'node'){
+                    state.nodes[action.payload.id].isSelected = true
+                } else {
+                    state.kernels[action.payload.id].isSelected = true
+                }
+            } else {
+                if (action.payload.type == 'node') {
+                    state.nodes.map( node => {
+                        node.isSelected = false;
+                    })
+                    state.nodes[action.payload.id].isSelected = true    
+                } else {
+                    state.kernels.map( kernel => {
+                        kernel.isSelected = false
+                    })
+                    state.kernels[action.payload.id].isSelected = true
+                }
+                }             
         }
     }
 })
 
 export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
     changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, 
-    changeConfigCamera, selectionNode, selectNode, shiftSelect } = slice.actions;
+    changeConfigCamera, selectionNode, selectNode } = slice.actions;
 
 export default slice.reducer;
