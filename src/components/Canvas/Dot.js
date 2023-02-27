@@ -21,18 +21,16 @@ export default function Dot({ pos , id, select }){
         onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
         onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
         onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        onClick: (e) => config.mouseType === 'kernel' ? createKernel : dispatch( selectNode({ e: e, id: id, type: 'node'})),
+        onClick: (e) => {e.event.stopPropagation(); config.mouseType === 'kernel' ? createKernel : dispatch( selectNode({ id: id, e: e, type: 'node'}))},
         onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
     useEffect( () => { setPosition( pos ) }, [ pos ])
 
     function createKernel () {
-        if (config.mouseType === 'kernel') {
-            dispatch(selectionNode({id: id}))
-            if( (selectedNode !== id) & (selectedNode !== null) ) {
-                dispatch(addKernel({start: selectedNode.node, end: id}))
-            }
+        dispatch(selectionNode({id: id}))
+        if( (selectedNode !== id) & (selectedNode !== null) ) {
+            dispatch(addKernel({start: selectedNode.node, end: id}))
         }
     }
 
@@ -63,8 +61,8 @@ export default function Dot({ pos , id, select }){
 
     return(
     <mesh { ...bindDotPos() } position={ position }>
-        <sphereGeometry args={ [ 0.09, 64, 32 ] } />
-        <meshStandardMaterial color={ select ? 'yellow' : 'blue' } />
+        <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />
+        <meshStandardMaterial attach={"material"} color={ select ? 'yellow' : 'blue' } />
         { contextMenu ? contextHtml() : null }
     </mesh>
 )}

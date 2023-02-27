@@ -39,7 +39,6 @@ export default function Area() {
 
     let arrKernels = kernels.map( ( kernel ) =>
         <Kernel 
-            onClick={(e) => dispatch(selectNode({ id: kernel.id, e: e, type: 'kernel' })) }
             key = { kernel.id + 'K' } 
             id ={ kernel.id }
             start = { kernel.start}
@@ -56,6 +55,7 @@ export default function Area() {
         selectFunc = {node.select}
         /> 
         )
+        
     
     async function handleDownloadImage () {
         const canvas = await html2canvas(cnvs.current),

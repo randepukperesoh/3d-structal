@@ -20,7 +20,7 @@ export default function NodeBar() {
     ])
 
     return (
-        <div>
+        <div className='barDiv'>
             <form className='Bar'>
                 <input defaultValue={0} onChange={(e) => startSet(e.target.value)} className='pointInput'></input>
                 <input defaultValue={0} onChange={(e) => endSet(e.target.value)} className='pointInput'></input>

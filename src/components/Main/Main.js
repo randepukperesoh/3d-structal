@@ -11,6 +11,7 @@ import './Main.css'
 function Main() {
     const [hideBar, setHideBar] = useState(false)
     const [paragraph, setParagraph] = useState('node');
+    useEffect(() => setHideBar(false), [paragraph])
     //let url = "http://localhost:3001/getData";
     //useEffect(() => {
     //    fetch(url, {mode:'cors'}) 
@@ -23,7 +24,7 @@ function Main() {
             <div className='main'>
                 <Header hideBar={hideBar} setHideBar={setHideBar} setParagraph={setParagraph}/>
                 {hideBar ? null: <SideBar paragraph={paragraph}/> }
-                <div className='area'>
+                <div className={ hideBar ? 'area maxArea' : 'area minArea ' }>
                         <Area/>
                 </div>
             </div>

@@ -38,13 +38,8 @@ const slice = createSlice({
             isSelected: false
         },{
             id:1,
-            start:1,
-            end:3,
-            isSelected: false
-        },{
-            id:2,
-            start:0,
-            end:2,
+            start:3,
+            end:1,
             isSelected: false
         }
     ],
@@ -124,16 +119,22 @@ const slice = createSlice({
                     state.kernels[action.payload.id].isSelected = true
                 }
             } else {
-                if (action.payload.type == 'node') {
-                    state.nodes.map( node => {
-                        node.isSelected = false;
-                    })
-                    state.nodes[action.payload.id].isSelected = true    
-                } else {
+                if (action.payload.type == 'kernel') {
                     state.kernels.map( kernel => {
                         kernel.isSelected = false
                     })
+                    state.nodes.map( node => {
+                        node.isSelected = false;
+                    })
                     state.kernels[action.payload.id].isSelected = true
+                } else {
+                    state.nodes.map( node => {
+                        node.isSelected = false;
+                    })
+                    state.kernels.map( kernel => {
+                        kernel.isSelected = false
+                    })
+                    state.nodes[action.payload.id].isSelected = true  
                 }
                 }             
         }

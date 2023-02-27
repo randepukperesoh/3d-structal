@@ -6,7 +6,7 @@ import ParamsBar from '../Bars/ParamsBar';
 export default function SideBar ({paragraph}) {
 
     return (
-    <div className='sideBar'>
+    <div className='sideBar '>
             {paragraph === 'node'? <NodeBar/> : paragraph ==='kernel'? <KernelBar/> : <ParamsBar/>} 
     </div>
     )

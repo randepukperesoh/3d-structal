@@ -54,7 +54,7 @@ export default function NodeBar() {
     }
 
     return (
-        <div>
+        <div className='barDiv'>
             <form className='Bar'>
                 <input onChange={(e) => xSet(e.target.value)} className='pointInput'></input>
                 <input onChange={(e) => ySet(e.target.value)} className='pointInput'></input>

@@ -1,30 +1,37 @@
 .Header{
     display: block;
     height: 98vh;
-    width: 50px;
     background-color: #0dcaf0;
 }
 .HeaderTab{
-    width: max-content;
+    width: 3vw;
     margin: 0 auto;
     align-items: center;
 }
+.headerSide{
+    width: 3vw;
+}
+.barDiv{
+    width: 300px;
+}
+
 .sideBar{
-    width: 30vh;
-    height: 90vh;
-    top: 50px;
-    left: 0;
-    margin: 0 10px 0 10px;
     background-color:#f8f9fa;
     display: flex;
+    width: 17vw;
 }
 .area{
-    max-width: 1920px;
-    max-height: 850px;
-    background: rgb(219, 219, 219);
+}
+.maxArea{
+    min-width: 97vw;
+}
+.minArea{
+    min-width: 80vw;
 }
 .main{
     display: flex;
+    width: 100VW;
+    max-height: 900px;
 }
 .closeTab{
     position: absolute;
