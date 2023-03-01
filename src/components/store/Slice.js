@@ -3,8 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const slice = createSlice({
     name:'nodes',
     initialState:{
-        nodes:[
-            {
+        nodes:[ {
             id:0,
             x: 1,
             y: 1,
@@ -28,10 +27,8 @@ const slice = createSlice({
             y: 0,
             z: 0,
             isSelected: false
-        }
-        ],
-        kernels:[
-            {
+        } ],
+        kernels:[ {
             id:0,
             start:0,
             end:1,
@@ -62,7 +59,6 @@ const slice = createSlice({
     reducers: {
         addNode(state, action) {
             state.nodes.push({
-                //action.payload
                 id: state.nodes.at(-1) ? state.nodes.at(-1).id + 1 : 0,
                 x: action.payload.x,
                 y: 0,
@@ -111,8 +107,7 @@ const slice = createSlice({
             state.selectedNode.node = action.payload.id;
         },
         selectNode( state, action ) {
-            console.log( action.payload)
-            if (action.payload.e.shiftKey) {
+            if (action.payload.e.altKey) {
                 if (action.payload.type == 'node'){
                     state.nodes[action.payload.id].isSelected = true
                 } else {

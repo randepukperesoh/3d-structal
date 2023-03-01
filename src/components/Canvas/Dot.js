@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import * as THREE from 'three';
 import { useSelector, useDispatch } from 'react-redux'
 import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, removeNode } from '../store/Slice';
 import { useGesture } from '@use-gesture/react';
@@ -18,14 +19,19 @@ export default function Dot({ pos , id, select }){
     const [contextMenu, setContextMenu] = useState(false);
 
     const bindDotPos = useGesture({
-        onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
-        onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
-        onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        onClick: (e) => {e.event.stopPropagation(); config.mouseType === 'kernel' ? createKernel : dispatch( selectNode({ id: id, e: e, type: 'node'}))},
-        onContextMenu:(e) => setContextMenu( !contextMenu )
+        //onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
+        //onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
+        //onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
+        onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : aboba(e)
+       // onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
     useEffect( () => { setPosition( pos ) }, [ pos ])
+
+    function aboba (e){
+        e.event.stopPropagation();
+        dispatch( selectNode({ id: id, type: 'node', e: e} ) )
+    }
 
     function createKernel () {
         dispatch(selectionNode({id: id}))
