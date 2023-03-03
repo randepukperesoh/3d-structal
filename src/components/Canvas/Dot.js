@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import * as THREE from 'three';
 import { useSelector, useDispatch } from 'react-redux'
 import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, removeNode } from '../store/Slice';
 import { useGesture } from '@use-gesture/react';
@@ -7,7 +6,7 @@ import { Html } from "@react-three/drei";
 import { Icon } from '@iconify/react';
 import './Dot.css'
 
-export default function Dot({ pos , id, select }){
+export default function Dot({ pos , id, isSelected }){
 
     const selectedNode = useSelector( state => state.nodes.selectedNode )
     const config = useSelector( state => state.nodes.config )
@@ -19,16 +18,16 @@ export default function Dot({ pos , id, select }){
     const [contextMenu, setContextMenu] = useState(false);
 
     const bindDotPos = useGesture({
-        //onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
-        //onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
-        //onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : aboba(e)
-       // onContextMenu:(e) => setContextMenu( !contextMenu )
+        onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
+        onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
+        onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
+        //onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : select(e),
+        onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
     useEffect( () => { setPosition( pos ) }, [ pos ])
 
-    function aboba (e){
+    function select (e){
         e.event.stopPropagation();
         dispatch( selectNode({ id: id, type: 'node', e: e} ) )
     }
@@ -68,7 +67,7 @@ export default function Dot({ pos , id, select }){
     return(
     <mesh { ...bindDotPos() } position={ position }>
         <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />
-        <meshStandardMaterial attach={"material"} color={ select ? 'yellow' : 'blue' } />
+        <meshStandardMaterial attach={"material"} color={ isSelected ? 'yellow' : 'blue' } />
         { contextMenu ? contextHtml() : null }
     </mesh>
 )}

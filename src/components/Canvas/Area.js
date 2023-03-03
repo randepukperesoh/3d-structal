@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Html, Stats } from "@react-three/drei";
 import Dot from './Dot'
 import Kernel from './Kernel';
 import Controls from './Controls'
 import GridPlane from './GridPlane'
 import { useSelector, useDispatch } from 'react-redux'
-import { addNode, selectNode } from '../store/Slice';
+import { addNode } from '../store/Slice';
 import html2canvas from "html2canvas"
 
 export default function Area() {
@@ -17,20 +16,6 @@ export default function Area() {
     
     const cnvs = useRef(null);
     
-    //class Node{
-    //    constructor(x, z) {
-    //        this.id = (nodes.at(-1) ? nodes.at(-1).id + 1 : 0);
-    //        this.x = x;
-    //        this.z = z;
-    //        this.y = 0;
-    //        this.isSelected = false;
-    //    }
-    //    select(id) {
-    //        dispatch(selectNode( {id: id} ));
-    //    }
-    //}
-
-    //console.log(nodes[0].isSelected)
     //useEffect( () => {
     //    fetch('http://localhost:8080/')
     //    .then((response) => response.json())
@@ -44,15 +29,16 @@ export default function Area() {
             start = { kernel.start}
             end = { kernel.end }
             isSelected = {kernel.isSelected}
+            concentratedForces={kernel.concentratedForces} 
+            moment={kernel.moment}
         />
     )
     
     let arrNode  = nodes.map( ( node ) =>  <Dot 
-        key = { node.id }
+        key = { node.id + 'n' }
         id = { node.id }
         pos = { [ node.x, node.y, node.z ] }
-        select = {node.isSelected}
-        selectFunc = {node.select}
+        isSelected = {node.isSelected}
         /> 
         )
         
@@ -139,7 +125,6 @@ export default function Area() {
             <GridPlane/>
             {arrNode}
             {arrKernels}
-            
         </Canvas>
     )
 }

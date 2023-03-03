@@ -5,9 +5,9 @@ const slice = createSlice({
     initialState:{
         nodes:[ {
             id:0,
-            x: 1,
+            x: 2,
             y: 1,
-            z: 1,
+            z: 0,
             isSelected: false
         },{
             id:1,
@@ -32,12 +32,17 @@ const slice = createSlice({
             id:0,
             start:0,
             end:1,
-            isSelected: false
+            isSelected: false,
+            concentratedForces: true,
+            moment: false
+
         },{
             id:1,
             start:3,
             end:1,
-            isSelected: false
+            isSelected: false,
+            concentratedForces: false,
+            moment: true
         }
     ],
         config:{
@@ -115,20 +120,12 @@ const slice = createSlice({
                 }
             } else {
                 if (action.payload.type == 'kernel') {
-                    state.kernels.map( kernel => {
-                        kernel.isSelected = false
-                    })
-                    state.nodes.map( node => {
-                        node.isSelected = false;
-                    })
+                    state.kernels.map( kernel => kernel.isSelected = false )
+                    state.nodes.map( node => node.isSelected = false )
                     state.kernels[action.payload.id].isSelected = true
                 } else {
-                    state.nodes.map( node => {
-                        node.isSelected = false;
-                    })
-                    state.kernels.map( kernel => {
-                        kernel.isSelected = false
-                    })
+                    state.nodes.map( node =>  node.isSelected = false )
+                    state.kernels.map( kernel => kernel.isSelected = false)
                     state.nodes[action.payload.id].isSelected = true  
                 }
                 }             
