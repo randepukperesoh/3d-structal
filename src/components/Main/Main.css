@@ -18,7 +18,7 @@
 .sideBar{
     background-color:#f8f9fa;
     display: flex;
-    width: 17vw;
+    flex-basis: 17vw;
 }
 .area{
 }

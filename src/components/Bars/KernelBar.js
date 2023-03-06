@@ -5,6 +5,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import {useSelector, useDispatch} from 'react-redux'
 import { addKernel } from '../store/Slice';
+import Loads from './Loads';
 
 export default function NodeBar() {
     const kernels = useSelector(state => state.nodes.kernels);  
@@ -18,6 +19,17 @@ export default function NodeBar() {
         { field: 'start', maxWidth: 100, editable: false},
         { field: 'end', maxWidth: 100, editable: false }
     ])
+     
+    const kernelLoadsArr = kernels.map( (kernel, i) => {
+        if ( kernel.isSelected) {
+            return <Loads
+            key={i + 'loads'}
+            id={kernel.id}
+            />
+        }
+        return
+        
+    })
 
     return (
         <div className='barDiv'>
@@ -28,7 +40,8 @@ export default function NodeBar() {
             </form>
             <div className="ag-theme-alpine" style={{ width: '100%', height: '40vh' }}>
                 <AgGridReact rowSelection={'multiple'} rowData={kernels} columnDefs={columnDefs}/>
-            </div>    
+            </div>   
+            {kernelLoadsArr}
         </div>
     )
 }

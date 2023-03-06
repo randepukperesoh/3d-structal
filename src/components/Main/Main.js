@@ -10,7 +10,7 @@ import './Main.css'
 
 function Main() {
     const [hideBar, setHideBar] = useState(false)
-    const [paragraph, setParagraph] = useState('node');
+    const [paragraph, setParagraph] = useState('kernel');
     useEffect(() => setHideBar(false), [paragraph])
     //let url = "http://localhost:3001/getData";
     //useEffect(() => {

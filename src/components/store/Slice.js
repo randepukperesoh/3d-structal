@@ -5,9 +5,9 @@ const slice = createSlice({
     initialState:{
         nodes:[ {
             id:0,
-            x: 2,
+            x: 1,
             y: 1,
-            z: 0,
+            z: 1,
             isSelected: false
         },{
             id:1,
@@ -32,8 +32,11 @@ const slice = createSlice({
             id:0,
             start:0,
             end:1,
-            isSelected: false,
+            isSelected: true,
             concentratedForces: true,
+            distributedForces: true ,
+            loadsStart: null,
+            loadEnd: null,
             moment: false
 
         },{
@@ -42,6 +45,9 @@ const slice = createSlice({
             end:1,
             isSelected: false,
             concentratedForces: false,
+            distributedForces: false,
+            loadsStart: null,
+            loadEnd: null,
             moment: true
         }
     ],
@@ -129,12 +135,23 @@ const slice = createSlice({
                     state.nodes[action.payload.id].isSelected = true  
                 }
                 }             
+        },
+        changeDistributedForces( state, action) {
+            console.log(action.payload)
+            state.kernels[action.payload.id].distributedForces = !state.kernels[action.payload.id].distributedForces;
+        },
+        changeStartLoads ( state, action) {
+            state.kernels[action.payload.id].loadsStart = action.payload.value;
+        },
+        changeEndLoads ( state, action) {
+            state.kernels[action.payload.id].loadEnd  = action.payload.value;
         }
     }
 })
 
 export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
     changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, 
-    changeConfigCamera, selectionNode, selectNode } = slice.actions;
+    changeConfigCamera, selectionNode, selectNode, changeDistributedForces,
+    changeEndLoads, changeStartLoads } = slice.actions;
 
 export default slice.reducer;

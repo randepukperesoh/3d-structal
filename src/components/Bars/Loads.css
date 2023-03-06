@@ -1,0 +1,16 @@
+.numberInput{
+    margin: 5px 0 0 0;
+    height: 20px;
+    width: 40px;
+}
+label {
+    display: block;
+  }
+  
+.flex{
+    display: flex;
+}
+.kernelCard{
+    border-bottom: 1px solid black;
+    padding: 0 0 10px 0;;
+}
