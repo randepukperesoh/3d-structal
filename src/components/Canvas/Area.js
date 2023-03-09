@@ -23,14 +23,16 @@ export default function Area() {
     //}, [])
 
     let arrKernels = kernels.map( ( kernel ) =>
+    
         <Kernel 
             key = { kernel.id + 'K' } 
             id ={ kernel.id }
             start = { kernel.start}
             end = { kernel.end }
+            kernel={kernel}
             isSelected = {kernel.isSelected}
-            distributedForces = {kernel.distributedForces}
-            concentratedForces={kernel.concentratedForces} 
+            distributedForces = {kernel.distributedForces.value}
+            concentratedForces={kernel.concentratedForces.value} 
             moment={kernel.moment}
         />
     )

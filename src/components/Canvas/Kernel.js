@@ -5,12 +5,14 @@ import { Line } from '@react-three/drei'
 import DistributedForces from '../workload/DistributedForces';
 import Moment from '../workload/Moment';
 
-export default function Kernel ({id, start, end, isSelected, moment, distributedForces, concentratedForces}){
+export default function Kernel ({ kernel}){
     const dispatch = useDispatch();
+    
+    const {id,start, end, isSelected, concentratedForces, distributedForces, moment} = kernel;
     
     let points = useSelector(state => state.nodes.nodes)
      
-    let nodes =[points[start], points[end]] 
+    let nodes = [points[start], points[end]] 
 
     nodes = nodes.map(node => {  
         return [node.x, node.y, node.z]
@@ -24,6 +26,6 @@ export default function Kernel ({id, start, end, isSelected, moment, distributed
             points={nodes} 
             />
             {moment ? <Moment/> : null }
-            {distributedForces ? <DistributedForces s={start} e={end}/> : null }
+            {distributedForces.value ? <DistributedForces s={start} e={end} obj={distributedForces} /> : null }
         </mesh>  
 )}

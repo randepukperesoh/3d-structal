@@ -33,22 +33,27 @@ const slice = createSlice({
             start:0,
             end:1,
             isSelected: true,
-            concentratedForces: true,
-            distributedForces: true ,
-            loadsStart: null,
-            loadEnd: null,
-            moment: false
+            concentratedForces: {
+                value: true,
+                loadX: 0,
+                loadY: 0,
+                loadZ: 0,
+                indient: [0,0,0]
+            },
+            distributedForces: {
+                value: true,
+                loadsStart: 12,
+                loadEnd: 2,
+                indient: false,
+                indientStart: 0.5,
+                indientEnd: 0.1
+            },
+            moment: {
+                value: false,
+                load: 0,
+                indient:0
+            }
 
-        },{
-            id:1,
-            start:3,
-            end:1,
-            isSelected: false,
-            concentratedForces: false,
-            distributedForces: false,
-            loadsStart: null,
-            loadEnd: null,
-            moment: true
         }
     ],
         config:{
@@ -138,13 +143,13 @@ const slice = createSlice({
         },
         changeDistributedForces( state, action) {
             console.log(action.payload)
-            state.kernels[action.payload.id].distributedForces = !state.kernels[action.payload.id].distributedForces;
+            state.kernels[action.payload.id].distributedForces.value = !state.kernels[action.payload.id].distributedForces.value;
         },
         changeStartLoads ( state, action) {
-            state.kernels[action.payload.id].loadsStart = action.payload.value;
+            state.kernels[action.payload.id].distributedForces.loadsStart = action.payload.value;
         },
         changeEndLoads ( state, action) {
-            state.kernels[action.payload.id].loadEnd  = action.payload.value;
+            state.kernels[action.payload.id].distributedForces.loadEnd  = action.payload.value;
         }
     }
 })

@@ -8,38 +8,81 @@ export default function Loads ({id}) {
     const kernel = useSelector(state => state.nodes.kernels[id]);
     
     return(
-
+        <>
         <div className='kernelCard'>
             <h5>Стержень {id}</h5>
-            <label htmlFor='distributedLoads'>
-                <input  onChange={() => dispatch(changeDistributedForces({id: id}))} defaultChecked={kernel.concentratedForces} type={'checkbox'} id={'distributedLoads'} />
+            <label>
+                <input  onChange={() => dispatch(changeDistributedForces({id: id}))} defaultChecked={kernel.distributedForces} type={'checkbox'} />
                 Распределенные нагрузки
             </label>
             <div className='flex'>
                 <label>
                     Нагрузка в начале
-                    <input onChange={(e) => dispatch(changeStartLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                    <input defaultValue={kernel.distributedForces.loadsStart} onChange={(e) => dispatch(changeStartLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
                 </label>
                 <label>
                     Нагрузка в конце
-                    <input onChange={(e) => dispatch(changeEndLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                    <input defaultValue={kernel.distributedForces.loadEnd} onChange={(e) => dispatch(changeEndLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
                 </label>
             </div>
             <label>
-                <input  type={'checkbox'} name={"indent"}></input>
+                <input defaultChecked={kernel.distributedForces.indient} type={'checkbox'}></input>
                 Добавить отступ
             </label>
             <div className='flex'>
                 <label>
                     Отступ от начала
-                    <input className='numberInput' type={"number"}></input>
+                    <input defaultValue={kernel.distributedForces.indientStart} className='numberInput' type={"number"}></input>
                 </label>
                 <label>
                     Отступ от конца
-                    <input className='numberInput' type={"number"}></input>
+                    <input defaultValue={kernel.distributedForces.indientEnd} className='numberInput' type={"number"}></input>
                 </label>
             </div>
         </div>
+        <div className='kernelCard'>
+            <label>
+                <input  onChange={() => dispatch(changeDistributedForces({id: id}))} defaultChecked={kernel.moment.value} type={'checkbox'} />
+                Моменты (Кн*м)
+            </label>
+            <div className='flex'>
+                <label>
+                    Величина
+                    <input defaultValue={kernel.moment.load} onChange={(e) => dispatch(changeStartLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label>
+                <label>
+                    Отступ
+                    <input defaultValue={kernel.moment.indient} onChange={(e) => dispatch(changeEndLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label>
+            </div>
+        </div>
+        <div className='kernelCard'>
+            <label>
+                <input  onChange={() => dispatch(changeDistributedForces({id: id}))} defaultChecked={kernel.concentratedForces.value} type={'checkbox'} />
+                Сосредаточенные силы (Кн)
+            </label>
+            <div className='flex'>
+                <label>
+                    По оси X
+                    <input defaultValue={kernel.distributedForces.loadsX} onChange={(e) => dispatch(changeStartLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label>
+                <label>
+                    По оси Y
+                    <input defaultValue={kernel.distributedForces.loadY} onChange={(e) => dispatch(changeEndLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label>
+                <label>
+                    По оси Z
+                    <input defaultValue={kernel.distributedForces.loadZ} onChange={(e) => dispatch(changeEndLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label>
+            </div>
+            <div>
+            <label>
+                   Отступ: 
+                    <input defaultValue={kernel.distributedForces.indient} onChange={(e) => dispatch(changeStartLoads({id: id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                </label> 
+            </div>
+        </div>
+        </>
     )
 }
 //<form>
