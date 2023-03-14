@@ -14,14 +14,20 @@ export default function DistributedForces({s, e, obj }) {
     const yDiff = end.y - start.y;
     const zDiff = end.z - start.z;
  
-    const lenghtOfKernel = Math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff) ;
-    
-    const numberOfArrows = (lenghtOfKernel ) * 6;
+    const lenghtOfKernel = Math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 
+    const xIndex = (xDiff / lenghtOfKernel).toFixed(2);
+    const yIndex = (yDiff / lenghtOfKernel).toFixed(2);
+    const zIndex = (zDiff / lenghtOfKernel).toFixed(2);
+    
+    let numberOfArrows = lenghtOfKernel * 6;
+    //console.log(numberOfArrows, (lenghtOfKernel -1) * 6 )
     const xStep = xDiff / numberOfArrows;
     const yStep = yDiff / numberOfArrows;
     const zStep = zDiff / numberOfArrows;
-        
+
+    numberOfArrows = numberOfArrows - ((obj.indientStart + obj.indientEnd) * 6)
+
     const arrForArrows= [[start.x, start.y, start.z]];
 
     for(let i = 1; i < numberOfArrows ; i++) {
@@ -29,7 +35,7 @@ export default function DistributedForces({s, e, obj }) {
     }
 
     arrForArrows.shift(); 
-    console.log(obj)
+    
     function arrow(position, i, scale) {
 
         let [x, y, z] = position;
@@ -46,7 +52,7 @@ export default function DistributedForces({s, e, obj }) {
         const c =[ [0.2, 0.2, 0 ], [0, 0, 0 ] ];
 
         return(
-            <mesh key={i + arrow} scale={[ scale, scale, scale ]} position={[x, y, z]}>
+            <mesh key={i + arrow} scale={[ scale, scale, scale ]} position={[x + obj.indientStart*xIndex, y + obj.indientStart * yIndex, z + obj.indientStart*zIndex]}>
                 <Line
                     lineWidth={1} 
                     color={'black'}
@@ -65,8 +71,9 @@ export default function DistributedForces({s, e, obj }) {
             </mesh>
         )
     }
+    let scale = 0;
+
     let ArrowsRes = arrForArrows.map( (arr, i) =>{
-        let scale = 0;
         if (loadEnd > loadsStart) {
             scale = Math.abs(zStep * 0.5) * (i + 1);
         } if ( loadEnd < loadsStart) {
@@ -87,9 +94,11 @@ export default function DistributedForces({s, e, obj }) {
         return(
             <mesh key={Math.sqrt(12) + 'wrapper'}>
                 <Line
-                points={ [ [start.x, start.y, start.z], 
-                    [start.x, start.y + loadsStart, start.z],
-                    [end.x, end.y + loadEnd, end.z], [end.x, end.y, end.z] ] }/>
+                points={ [ 
+                    [start.x + obj.indientStart*xIndex , start.y + obj.indientStart * yIndex, start.z + obj.indientStart*zIndex], 
+                    [start.x + obj.indientStart*xIndex , start.y + obj.indientStart*yIndex + loadsStart, start.z + obj.indientStart*zIndex],
+                    [end.x - obj.indientEnd*xIndex , end.y - obj.indientEnd*yIndex + loadEnd, end.z - obj.indientEnd*zIndex], 
+                    [end.x - obj.indientEnd*xIndex , end.y - obj.indientEnd*yIndex, end.z - obj.indientEnd*zIndex] ] }/>
             </mesh>
         )
     }

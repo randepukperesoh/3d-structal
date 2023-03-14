@@ -33,7 +33,7 @@ export default function Area() {
             isSelected = {kernel.isSelected}
             distributedForces = {kernel.distributedForces.value}
             concentratedForces={kernel.concentratedForces.value} 
-            moment={kernel.moment}
+            moment={kernel.moment.value}
         />
     )
     

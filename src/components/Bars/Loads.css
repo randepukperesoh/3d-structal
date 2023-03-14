@@ -12,5 +12,15 @@ label {
 }
 .kernelCard{
     border-bottom: 1px solid black;
-    padding: 0 0 10px 0;;
+}
+.forcesWrapper{
+    border-bottom: 1px solid black;
+}
+.loadWrapper{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px 0 10px 0;
+}
+p{
+    margin: 0;
 }

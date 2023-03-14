@@ -9,7 +9,7 @@ import Loads from './Loads';
 
 export default function NodeBar() {
     const kernels = useSelector(state => state.nodes.kernels);  
-
+ 
     let [ start, startSet] = useState(0);
     let [ end, endSet] = useState(0);
     
@@ -23,8 +23,8 @@ export default function NodeBar() {
     const kernelLoadsArr = kernels.map( (kernel, i) => {
         if ( kernel.isSelected) {
             return <Loads
-            key={i + 'loads'}
-            id={kernel.id}
+            key={i*Math.random()*10 + 'loads'}
+            kernel={kernel}
             />
         }
         return
