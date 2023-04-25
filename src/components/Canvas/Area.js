@@ -7,6 +7,7 @@ import GridPlane from './GridPlane'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNode } from '../store/Slice';
 import html2canvas from "html2canvas"
+import Fluid from '../Supports/Fluid';
 
 export default function Area() {
     const nodes = useSelector(state => state.nodes.nodes);
@@ -15,12 +16,6 @@ export default function Area() {
     const dispatch = useDispatch();
     
     const cnvs = useRef(null);
-    
-    //useEffect( () => {
-    //    fetch('http://localhost:8080/')
-    //    .then((response) => response.json())
-    //    .then((data) => console.log(data));
-    //}, [])
 
     let arrKernels = kernels.map( ( kernel ) =>
     
@@ -65,8 +60,33 @@ export default function Area() {
             let z = Math.round(e.point.z);
             dispatch(addNode({x: x, z: z}))
         }
-    
-        //if (config.mouseType === 'square'){
+    }
+
+    //onClick={() => handleDownloadImage()}
+
+    return(
+        <Canvas
+            gl={{ preserveDrawingBuffer: true }} 
+            ref={cnvs} 
+            camera={{ fov: 75, near: 0.1, 
+            far: 1000, position: [7, 5, 0] }}
+            >
+            
+            <Controls />
+            <ambientLight intensity={0.5}/>
+            <pointLight position={[10, 10, 10]}/>
+            <mesh position={[0, -0.0001, 0]} onClick={(e) => createNode(e)}>
+                <boxGeometry attach="geometry" args={[40, 0.0001, 40]} />
+            </mesh>
+            <GridPlane/>
+            {arrNode}
+            {arrKernels}
+        </Canvas>
+    )
+}
+
+
+ //if (config.mouseType === 'square'){
     //
         //    let x1 = Math.round( e.point.x );
         //    let z1 = Math.round( e.point.z );
@@ -107,27 +127,3 @@ export default function Area() {
         //    dispatch(addKernel({start: triangleNode[1], end: triangleNode[2]}));
         //    dispatch(addKernel({start: triangleNode[2], end: triangleNode[0]}));
         //}
-    }
-
-    //onClick={() => handleDownloadImage()}
-
-    return(
-        <Canvas
-            gl={{ preserveDrawingBuffer: true }} 
-            ref={cnvs} 
-            camera={{ fov: 75, near: 0.1, 
-            far: 1000, position: [7, 5, 0] }}
-            >
-            
-            <Controls />
-            <ambientLight intensity={0.5}/>
-            <pointLight position={[10, 10, 10]}/>
-            <mesh position={[0, -0.0001, 0]} onClick={(e) => createNode(e)}>
-                <boxGeometry attach="geometry" args={[40, 0.0001, 40]} />
-            </mesh>
-            <GridPlane/>
-            {arrNode}
-            {arrKernels}
-        </Canvas>
-    )
-}

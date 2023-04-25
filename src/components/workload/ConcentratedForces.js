@@ -1,12 +1,21 @@
 import { Line } from '@react-three/drei'
 
-export default function ConcentratedForces({position, obj, scale = 0.4}) {
-    const { value, loadX, loadY, loadZ, indient} = obj;
-    let [x, y, z] = position[1];
-    const start = position[0];
-    const end = position[1];
+export default function ConcentratedForces({pos, type, obj, scale = 0.4}) {
     
+    const { value, loadX, loadY, loadZ, indient} = obj;
+    let x, y, z;
+    let end, start;
 
+    if(pos[1][0]){
+        [x, y, z] = pos[1];
+        end = pos[1];
+        start = pos[0]
+    } else {
+        [x, y, z] = pos; 
+        end = pos
+        start = pos
+    }
+    
     const a =[ [-0.2, 0.2, 0], [0, 0, 0 ] ];
     const b =[ [0, 0, 0 ], [0, 0.4, 0 ] ];
     const c =[ [0.2, 0.2, 0 ], [0, 0, 0 ] ];
@@ -21,16 +30,20 @@ export default function ConcentratedForces({position, obj, scale = 0.4}) {
     const yIndex = (yDiff / lenghtOfKernel).toFixed(2);
     const zIndex = (zDiff / lenghtOfKernel).toFixed(2);
 
+    isNaN(indient * xIndex) ? x = x : x = x - (indient * xIndex);
+    isNaN(indient * yIndex) ? y = y : y = y - (indient * yIndex);
+    isNaN(indient * zIndex) ? z = z : z = z - (indient * zIndex);
+
     let result = [];
-    console.log(loadX, loadY, loadZ)
+
     function arrow(rotatate) {
         
         return(
             <mesh 
             rotation={rotatate} 
-            key={rotatate} 
+            key={'someline'+rotatate} 
             scale={[ scale, scale, scale ]} 
-            position={[x - (indient * xIndex), y - (indient * yIndex), z - (indient* zIndex)]}>
+            position={type == 'node' ?[0,0,0] :[x, y, z]}>
                 <Line
                     lineWidth={1} 
                     color={'black'}
@@ -57,7 +70,7 @@ export default function ConcentratedForces({position, obj, scale = 0.4}) {
     } if ( loadZ ) {
         result.push(arrow([1.5708, 1.5708, 0]))
     }
-
+    
     return(
         <mesh>
            {result} 

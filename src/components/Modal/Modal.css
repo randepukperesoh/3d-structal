@@ -1,0 +1,17 @@
+.modalWrapper{
+    background-color: rgb(207, 207, 207);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    opacity: 0.6;
+}
+.modal{
+    background-color: white;
+    width: 400px;
+    height: 600px;
+    margin: 200px auto 0;
+    opacity: 1;
+}

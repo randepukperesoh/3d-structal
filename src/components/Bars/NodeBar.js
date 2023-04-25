@@ -5,6 +5,7 @@ import {addNode , changeNode, changeConfigMouseType} from '../store/Slice';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import LoadsNode from './LoadsNode'
 
 
 export default function NodeBar() {
@@ -13,7 +14,7 @@ export default function NodeBar() {
     
     const [nodes, setNodes] = useState(data);
 
-    useEffect(()=>{ setNodes(data) }, [data])
+    useEffect(() => { setNodes(data) }, [data])
 
     const [x, xSet] = useState();
     const [y, ySet] = useState();
@@ -48,6 +49,15 @@ export default function NodeBar() {
             }
         })
     }
+
+    const loadsArr = data.map( (node, i) => {
+        if(node.isSelected){
+            return <LoadsNode
+                        node={node}
+                        key={i*Math.random()*10 + 'loads'}
+                        />  
+        }
+    })
     
     function push () {
         dispatch(addNode({x, y, z}))
@@ -65,14 +75,17 @@ export default function NodeBar() {
                 <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'node'} ) ) }}>node</button>
                 <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'camera'} ) ) } }>camera</button>
                 <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'kernel'} ) ) } }>kernel</button>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'square'} ) ) } }>square</button>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'triangle'} ) ) } }>triangle</button>
+                {/* <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'square'} ) ) } }>square</button>
+                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'triangle'} ) ) } }>triangle</button> */}
             </div>
-            <div className="ag-theme-alpine" style={{ width: '100%', height: '80vh' }}>
-                <AgGridReact
-                rowData={nodes}
-                columnDefs={columnDefs} />
+            <div className='gridWrapper'>
+                <div className="ag-theme-alpine" style={{ width: '100%', height: '40vh' }}>
+                    <AgGridReact
+                    rowData={nodes}
+                    columnDefs={columnDefs} />
+                </div>
             </div>
+            {loadsArr}
         </div>
     )
 }

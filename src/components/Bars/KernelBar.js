@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Bars.css';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -12,8 +12,14 @@ export default function NodeBar() {
  
     let [ start, startSet] = useState(0);
     let [ end, endSet] = useState(0);
-    
+    const [sortament, setSortament] = useState(false) ;
     const dispatch = useDispatch();
+
+    useEffect( () => {
+        fetch('http://localhost:3001/getData')
+        .then((response) => response.json())
+        .then((data) => setSortament(data))
+    }, [])
 
     const columnDefs = ([
         { field: 'start', maxWidth: 100, editable: false},
@@ -25,6 +31,7 @@ export default function NodeBar() {
             return <Loads
             key={i*Math.random()*10 + 'loads'}
             kernel={kernel}
+            sortament={sortament}
             />
         }
         return

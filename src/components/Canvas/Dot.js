@@ -4,12 +4,18 @@ import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, r
 import { useGesture } from '@use-gesture/react';
 import { Html } from "@react-three/drei";
 import { Icon } from '@iconify/react';
-import './Dot.css'
+import ConcentratedForces from '../workload/ConcentratedForces';
+import Moment from '../workload/Moment';
+import Fluid from '../Supports/Fluid';
+import Fixed from '../Supports/Fixed';
+import Anchorage from '../Supports/Anchorage';
+import './Dot.css';
 
 export default function Dot({ pos , id, isSelected }){
 
     const selectedNode = useSelector( state => state.nodes.selectedNode )
     const config = useSelector( state => state.nodes.config )
+    const node = useSelector( state => state.nodes.nodes[id])
 
     const dispatch = useDispatch();
 
@@ -21,7 +27,7 @@ export default function Dot({ pos , id, isSelected }){
         onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
         onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
         onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        //onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : select(e),
+        onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : select(e),
         onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
@@ -62,12 +68,26 @@ export default function Dot({ pos , id, isSelected }){
             </div>
         </Html>
     )}
-
-
+            
+    const arrConcentratedForces = node.concentratedForces.map( (forces, i) => {
+        if(forces.value){
+            return <ConcentratedForces key={'nodeConcentradetForces'+i} type={'node'} pos={position} obj={forces}/>
+        }
+    })
+    const arrMoment = node.moment.map( (moment, i) => {
+        if(moment.value){
+            return <Moment key={'nodeMoment>'+i} type={'node'} position={position} />
+        }
+    })
+    
+    //console.log(position, node.supports.type)
     return(
     <mesh { ...bindDotPos() } position={ position }>
         <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />
         <meshStandardMaterial attach={"material"} color={ isSelected ? 'yellow' : 'blue' } />
         { contextMenu ? contextHtml() : null }
+        {arrConcentratedForces}
+        {arrMoment}
+        {node.supports.type == 'fluid' ? <Fluid position={position}/> : node.supports.type == 'anchorage' ? <Anchorage position={position}/> : node.supports.type == 'fixed' ? <Fixed position={position}/> : null }
     </mesh>
 )}

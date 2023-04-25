@@ -1,0 +1,11 @@
+.wrapperDrop{
+    min-height: 30px;
+    max-height: 300px;
+    overflow: auto;
+    border-bottom: 1px solid black;
+}
+.Dropdown-option{
+    border: 0.1px solid black;
+    margin: 0px 0 5px 0;
+    background-color: aliceblue;
+}

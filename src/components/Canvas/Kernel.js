@@ -20,15 +20,21 @@ export default function Kernel ({ kernel}){
     })
 
     const concentratedRes = concentratedForces.map( (obj, i) => {
-        return <ConcentratedForces key={i+'conForces'} obj={obj} position={nodes}/>
+        if(obj.value){
+            return <ConcentratedForces key={i+'conForces'} obj={obj} pos={nodes}/>
+        }
     })
 
     const momentRes = moment.map( (obj, i) => {
-        return <Moment key={i+'moment'} position={nodes} indient={obj.indient}/>
+        if(obj.value){
+            return <Moment key={i+'moment'} position={nodes} indient={obj.indient}/>
+        }
     })
     
     const distributedRes = distributedForces.map( (obj, i) => {
+        if(obj.value){
             return <DistributedForces key={i+'disForces'} s={start} e={end} obj={obj} />
+        }   
     })
 
     return(

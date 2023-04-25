@@ -6,32 +6,64 @@ const slice = createSlice({
         nodes:[ {
             id:0,
             x: 1,
-            y: 0,
+            y: 2,
             z: 1,
-            isSelected: false
+            isSelected: false,
+            moment: [],
+            concentratedForces: [],
+            supports:{
+                type: 'none'
+            }
         },{
             id:1,
             x: 3,
-            y: 1,
+            y: 3,
             z: 0,
-            isSelected: false
+            isSelected: true,
+            moment: [{
+                value: true,
+                id: 0,
+                load: 10,
+            }],
+            concentratedForces: [{
+                value: true,
+                id: 0,
+                loadX: 1,
+                loadY: 1,
+                loadZ: 1 
+                }],
+                supports:{
+                    type: 'none'
+                }
         },{
             id:2,
             x: 1,
-            y: 0,
+            y: 2,
             z: 1,
-            isSelected: false
+            isSelected: false,
+            moment: [],
+            concentratedForces: [],
+            supports:{
+                type: 'none'
+            }
         },{
             id:3,
             x: 1,
-            y: 0,
+            y: 2,
             z: 0,
-            isSelected: false
+            isSelected: false,
+            concentratedForces: [
+            ],
+            moment: [],
+            supports:{
+                type: 'none'
+            }
         } ],
         kernels:[ {
             id:0,
             start:0,
             end:1,
+            materialId: 32,
             isSelected: true,
             concentratedForces: [{
                     value: true,
@@ -39,11 +71,11 @@ const slice = createSlice({
                     loadX: 1,
                     loadY: 0,
                     loadZ: 0,
-                    indient: 0
+                    indient: 1
                 },
             ],
             distributedForces: [{
-                    value: true,
+                    value: false,
                     id: 0,
                     loadsStart: 12,
                     loadEnd: 2,
@@ -53,10 +85,10 @@ const slice = createSlice({
                 },
             ],
             moment: [{
-                value: true,
+                value: false,
                 id: 0,
-                load: 0,
-                indient:1
+                load: 10,
+                indient:0
             }],
 
         }
@@ -65,7 +97,8 @@ const slice = createSlice({
             yzGrid: false,
             yxGrid: false,
             camera: true,
-            meshDivisions: 10,
+            divisionSize: 10,
+            divisionCount: 10,
             mouseType: 'camera'
             
         },
@@ -115,8 +148,11 @@ const slice = createSlice({
         changeConfigGridYZ( state, action) {
             state.config.yzGrid = action.payload.yzGrid;
         },
-        changeConfigMeshSize( state, action ) {
-            state.config.meshDivisions = action.payload.meshDivisions;
+        changeDivisionSize( state, action ) {
+            state.config.divisionSize = action.payload.value;
+        },
+        changeDivisionCount( state, action ) {
+            state.config.divisionCount = action.payload.value;
         },
         changeConfigMouseType ( state, action ) {
             state.config.mouseType = action.payload.mouseType;
@@ -165,10 +201,13 @@ const slice = createSlice({
             state.kernels[action.payload.id].moment[action.payload.subId].value = !state.kernels[action.payload.id].moment.value;
         },
         changeMomentLoad(state, action) {
-            state.kernels[action.payload.id].moment[action.payload.subId].load = action.payload.load
+            state.kernels[action.payload.id].moment[action.payload.subId].load = action.payload.value
+        },
+        changeMomentLoadNode(state, action) {
+            state.nodes[action.payload.id].moment[action.payload.subId].load = action.payload.value
         },
         changeMomentIndient(state, action) {
-            state.kernels[action.payload.id].moment[action.payload.subId].Indient = action.payload.load
+            state.kernels[action.payload.id].moment[action.payload.subId].indient = Number(action.payload.value)
         },
         changeConcentratedForces (state, action) {
             state.kernels[action.payload.id].concentratedForces[action.payload.subId].value = !state.kernels[action.payload.id].concentratedForces.value
@@ -181,6 +220,15 @@ const slice = createSlice({
         },
         changeConcentratedLoadZ (state, action) {
             state.kernels[action.payload.id].concentratedForces[action.payload.subId].loadZ = Number(action.payload.load);
+        },
+        changeConcentratedLoadXNode (state, action) {
+            state.nodes[action.payload.id].concentratedForces[action.payload.subId].loadX = Number(action.payload.load);
+        },
+        changeConcentratedLoadYNode (state, action) {
+            state.nodes[action.payload.id].concentratedForces[action.payload.subId].loadY = Number(action.payload.load);
+        },
+        changeConcentratedLoadZNode (state, action) {
+            state.nodes[action.payload.id].concentratedForces[action.payload.subId].loadZ = Number(action.payload.load);
         },
         changeConcentratedIndient (state, action) {
             state.kernels[action.payload.id].concentratedForces[action.payload.subId].indient = action.payload.indient;
@@ -212,13 +260,34 @@ const slice = createSlice({
                 }
             )
         },
+        addConcentratedForcesNodes(state, action) { 
+            state.nodes[action.payload.id].concentratedForces.push(
+                {
+                    value: true,
+                    id: state.nodes[action.payload.id].concentratedForces.at(-1) ? state.nodes[action.payload.id].concentratedForces.at(-1) + 1 : 0 ,
+                    loadX: 0,
+                    loadY: 0,
+                    loadZ: 0,
+                    
+                }
+            )
+        },
         addMoment(state, action){
             state.kernels[action.payload.id].moment.push(
                 {
                     value: true,
-                    id: state.kernels[action.payload.id].moment.at(-1).id + 1,
+                    id: state.kernels[action.payload.id].moment.at(-1).id ? state.kernels[action.payload.id].moment.at(-1).id + 1 : 0,
                     load: 0,
-                    indient:1
+                    indient:0
+                }
+            )
+        },
+        addMomentNode(state, action){
+            state.nodes[action.payload.id].moment.push(
+                {
+                    value: true,
+                    id:state.nodes[action.payload.id].moment.at(-1) ? state.nodes[action.payload.id].moment.at(-1).id + 1 : 0,
+                    load: 0,
                 }
             )
         },
@@ -228,19 +297,27 @@ const slice = createSlice({
         deleteDistributedForces(state, action){
             state.kernels[action.payload.id].concentratedForces.splice(action.payload.subId, action.payload.subId)
         },
-       
+        changeSupports (state, action) {
+            state.nodes[action.payload.id].supports.type = action.payload.value;
+        },
+        changeMaterial( state, action) {
+            state.kernels[action.payload.id].materialId = Number(action.payload.value)
+        }
     }
 })
 
 export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
-    changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, 
-    changeConfigCamera, selectionNode, selectNode, changeDistributedForces,
-    changeEndLoads, changeStartLoads, changeMomemntValue, changeConcentratedForces,
-    changeConcentratedLoadX, changeConcentratedLoadY, changeConcentratedLoadZ, 
-    changeMomentLoad, changeMomentIndient, changeDistributedIndientStart,
-    changeDistributedIndientEnd, changeConcentratedIndient,
-    addDistributedForces, addConcentratedForces, addMoment, deleteConcentratedForces,
-    deleteDistributedForces
-     } = slice.actions;
+    changeConfigGridYZ, changeConfigMeshSize, changeConfigMouseType, changeConfigCamera, 
+    selectionNode, selectNode, changeDistributedForces, changeEndLoads, changeStartLoads, 
+    changeMomemntValue, changeConcentratedForces, changeConcentratedLoadX, 
+    changeConcentratedLoadY, changeConcentratedLoadZ, changeMomentLoad, 
+    changeMomentIndient, changeDistributedIndientStart, changeDistributedIndientEnd, 
+    changeConcentratedIndient, addDistributedForces, addConcentratedForces, addMoment, 
+    deleteConcentratedForces, deleteDistributedForces, addConcentratedForcesNode, 
+    addMomentNode, changeMomentLoadNode, changeConcentratedLoadYNode, 
+    changeConcentratedLoadXNode, changeConcentratedLoadZNode, changeDivisionSize, 
+    changeDivisionCount, addConcentratedForcesNodes, changeSupports, changeMaterial 
+    
+} = slice.actions;
 
 export default slice.reducer;
