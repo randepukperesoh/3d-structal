@@ -10,10 +10,15 @@ export default function Modal({setModal}) {
 
     //console.log(kernels[0].materialId)
 
+    
+
     useEffect(() => {
-        fetch(`http://localhost:3001/getMaterial?id=${kernels[0].materialId}`)
-            .then((response) => response.json())
-            .then((data) => setSortament(data))
+        
+        kernels.map( k => {
+            fetch(`http://localhost:3001/getMaterial?id=${k.materialId}`)
+            .then((response) => response.json() )
+            .then((data) => setSortament(data) )
+        })
             
     }, [] )
     
@@ -102,13 +107,54 @@ export default function Modal({setModal}) {
                     }
                 })
             }).flat(),
-            //cSections: что это 
-            //cRoles: 
-            //cRodGroups: 
-            cMaterials: kernels.map(kernel => {
+            cSections: kernels.map((k, i) => {
+                return sortament[i]
+            }),
+            //cSections: kernels.map( (kernel, i) => {
+            //    return{
+            //        materialId: kernel.materialId,
+            //        cross_section_type: 1, //
+            //        cross_section_standart: 1,//
+            //        id: kernel.id,
+            //        title: sortament[i].marka,//
+            //        marka: sortament[i].marka,
+            //        formType: sortament[i].marka,//
+            //        a: sortament[i].a,
+            //        b: sortament[i].b,
+            //        h: sortament[i].h,
+            //        inertia_x: sortament[i].inertia_x,
+            //        inertia_0_x: sortament[i].inertia_0_x,
+            //        inertia_y: sortament[i].inertia_y,
+            //        inertia_0_y: sortament[i].inertia_0_y,
+            //        s_x: sortament[i].s_x,
+            //        t_s: sortament[i].t_s,
+            //        t_f: sortament[i].t_f,
+            //        w_x: sortament[i].w_x,
+            //        w_y: sortament[i].w_y,
+            //        h_ef: sortament[i].h_e,
+            //        b_ef: sortament[i].b_e,
+            //        i_t: sortament[i].i_t,
+            //        r: sortament[i],
+            //        y_c: sortament[i],
+            //        hMin: sortament[i],
+            //        hMax: sortament[i],
+            //        bMin: sortament[i],
+            //        bMax: sortament[i],
+            //        relMin: sortament[i],
+            //        relMax: sortament[i],
+            //        cB: sortament[i],
+            //        cS: sortament[i],
+            //        rB: sortament[i],
+            //        EB: sortament[i],
+            //        aS: sortament[i],
+            //        rM: sortament[i]
+            //    }
+            //}),
+
+            cMaterials: kernels.map( (kernel, i) => {
                 return{
-                    title: sortament.TypeName,
-                    ro: sortament.R,
+                    title: sortament[i].TypeName,
+                    ro: 0,
                     E: 0,
                     nu: 0,
                     gamma: 0,
@@ -121,6 +167,7 @@ export default function Modal({setModal}) {
                     overload: 0     
                 }
             })
+
             //count:, selfWeight:, measureIds: сделать новый пункт в настройках приложения?
             //labelDiagramValue что это
             //report ничего не понятно

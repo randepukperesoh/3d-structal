@@ -6,11 +6,11 @@ import { changeDistributedForces, changeDistributedIndientStart,
     changeEndLoads, changeMomemntValue, changeStartLoads, changeMomentLoad,
     changeConcentratedIndient, addDistributedForces, addConcentratedForces,
     addMoment, deleteConcentratedForces, deleteDistributedForces } from '../store/Slice';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import Drop from './Drop';
 
-export default function Loads ({ kernel, sortament}) {
+export default function Loads ({ kernel}) {
     
     const dispatch = useDispatch();
     const id = kernel.id;
@@ -19,30 +19,6 @@ export default function Loads ({ kernel, sortament}) {
     const [ distributed, setDistributed ] = useState(true);
     const [ moment, setMoment ] = useState(false);
     const [ concentrated, setConcentrated ] = useState(true);
-
-    let typeName = new Map();
-
-    function selectSortament (type, marka){
-        let value;
-        sortament.map(sort => {
-           if([type, marka] = sort) {
-                console.log(sort)
-            } 
-        });
-    }
-
-    for( let i = 0; i<sortament.length ;i++ ) {
-        if( !typeName.has(sortament[i].TypeName)) {
-            typeName.set(sortament[i].TypeName)
-        }
-        if( typeName.has(sortament[i].TypeName )) {
-            typeName.set(sortament[i].TypeName, typeName.get(sortament[i].TypeName) ? typeName.get(sortament[i].TypeName).concat([[i, sortament[i].Marka]]) : [[ i, sortament[i].Marka]])
-        }
-    }
-    
-    const sort = Array.from(typeName)
-    
-    
 
     const arrDistributed = kernel.distributedForces.map( (forces) => {
         if (forces.value) {
@@ -126,8 +102,6 @@ export default function Loads ({ kernel, sortament}) {
             <div className='forcesWrapper'>
                     <Drop 
                         id={id}
-                        sort={sort}
-                        func={selectSortament}
                     />
             </div>
             <div className='forcesWrapper'>
