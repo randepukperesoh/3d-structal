@@ -7,7 +7,7 @@ const slice = createSlice({
             id:0,
             x: 1,
             y: 2,
-            z: 1,
+            z: 0,
             isSelected: false,
             moment: [],
             concentratedForces: [],
@@ -35,30 +35,8 @@ const slice = createSlice({
                 supports:{
                     type: 'none'
                 }
-        },{
-            id:2,
-            x: 1,
-            y: 2,
-            z: 1,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [],
-            supports:{
-                type: 'none'
-            }
-        },{
-            id:3,
-            x: 1,
-            y: 2,
-            z: 0,
-            isSelected: false,
-            concentratedForces: [
-            ],
-            moment: [],
-            supports:{
-                type: 'none'
-            }
-        } ],
+        }
+    ],
         kernels:[ {
             id:0,
             start:0,

@@ -4,13 +4,10 @@ import {useSelector} from 'react-redux'
 
 export default function Modal({setModal}) {
     const [sortament, setSortament] = useState(false) ;
+    const [ result, setResult] = useState(false);
 
     const nodes = useSelector(state => state.nodes.nodes)
     const kernels = useSelector(state => state.nodes.kernels)
-
-    //console.log(kernels[0].materialId)
-
-    
 
     useEffect(() => {
         
@@ -22,9 +19,7 @@ export default function Modal({setModal}) {
             
     }, [] )
     
-    console.log(sortament)
-
-    function createJSON() {
+    async function createJSON() {
         const data = {
             cNodes: nodes.map(node => {
                 return {
@@ -108,6 +103,7 @@ export default function Modal({setModal}) {
                 })
             }).flat(),
             cSections: kernels.map((k, i) => {
+                
                 return sortament[i]
             }),
             //cSections: kernels.map( (kernel, i) => {
@@ -151,30 +147,42 @@ export default function Modal({setModal}) {
             //    }
             //}),
 
-            cMaterials: kernels.map( (kernel, i) => {
-                return{
-                    title: sortament[i].TypeName,
-                    ro: 0,
-                    E: 0,
-                    nu: 0,
-                    gamma: 0,
-                    rY: 0,
-                    rYn: 0,
-                    rU: 0,
-                    sigmaMax: 0,
+            cMaterials: {
+                    title: 'Сталь углеродистая',
+                    ro: 7850,
+                    E: 200e9,
+                    nu: 0.5,
+                    gamma: 7850*9.80666,
+                    rY: 240,
+                    rYn: 245,
+                    rU: 360,
+                    sigmaMax: 240,
                     sigmaNMax: 0,
-                    tauMax: 0,
-                    overload: 0     
+                    tauMax: 140,
+                    overload: 5     
                 }
-            })
+            
 
             //count:, selfWeight:, measureIds: сделать новый пункт в настройках приложения?
             //labelDiagramValue что это
             //report ничего не понятно
         }
-        console.log(data)
+        //console.log( )
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)    
+        };
+
+        fetch('https://api.sapr.guru/Home/FrameElement2Node', reqOptions)
+        .then(res=>  res.json()) 
+        .then( data => setResult(data))
     }
-    createJSON()
+
+    console.log(result)
+
+    //createJSON()
+    
     return(
         <div onClick={() => setModal(false)} className="modalWrapper">
             <div onClick={(e) => e.stopPropagation()} className='modal'>

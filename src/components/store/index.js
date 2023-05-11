@@ -10,5 +10,3 @@ export default configureStore({
         serializableCheck: false,
     })
 })
-//A non-serializable value was detected in an action, in the path:
-// `payload`. Value:
