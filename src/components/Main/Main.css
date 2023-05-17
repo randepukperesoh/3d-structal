@@ -1,7 +1,7 @@
 .Header{
     display: block;
     height: 98vh;
-    background-color: #0dcaf0;
+    background-color: #3AAFA9 ;
 }
 .HeaderTab{
     width: 3vw;
@@ -9,21 +9,24 @@
     align-items: center;
 }
 .headerSide{
-    width: 3vw;
+    width: 4vw;
+    min-width: 45px;
 }
 .barDiv{
     width: 300px;
 }
-
 .sideBar{
-    background-color:#f8f9fa;
+    background-color:#FEFFFF;
+    border-right: 0.5px solid #17252A;
+    border-left: 0.5px solid #17252A;
     display: flex;
     flex-basis: 17vw;
 }
 .area{
+
 }
 .maxArea{
-    min-width: 97vw;
+    min-width: 96vw;
 }
 .minArea{
     min-width: 80vw;

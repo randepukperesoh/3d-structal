@@ -6,11 +6,13 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import LoadsNode from './LoadsNode'
+import { Icon } from '@iconify/react';
 
 
 export default function NodeBar() {
 
     const data = useSelector(state => state.nodes.nodes);
+    const config = useSelector(state => state.nodes.config.mouseType)
     
     const [nodes, setNodes] = useState(data);
 
@@ -71,12 +73,11 @@ export default function NodeBar() {
                 <input onChange={(e) => zSet(e.target.value)} className='pointInput'></input>
                 <button type='button' onClick={() => push()} className='inpBtn'>Add </button>
             </form>
-            <div>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'node'} ) ) }}>node</button>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'camera'} ) ) } }>camera</button>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'kernel'} ) ) } }>kernel</button>
-                {/* <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'square'} ) ) } }>square</button>
-                <button onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'triangle'} ) ) } }>triangle</button> */}
+            <div className='mouseType flex'>
+                <Icon className={config === 'camera' ? 'selectMT' : '' } onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'camera'} ) ) } } icon="material-symbols:photo-camera-outline" width="40" />
+                <Icon className={config === 'node' ? 'selectMT' : '' } onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'node'} ) ) }} icon="carbon:dot-mark" width="40" />
+                <Icon className={config === 'kernel' ? 'selectMT' : '' } onClick={() => {dispatch(changeConfigMouseType( {mouseType : 'kernel'} ) ) } } icon="streamline:interface-hierarchy-1-node-organization-links-structure-link-nodes-network-hierarchy" width="35" />
+                
             </div>
             <div className='gridWrapper'>
                 <div className="ag-theme-alpine" style={{ width: '100%', height: '40vh' }}>

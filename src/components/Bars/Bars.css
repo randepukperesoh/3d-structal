@@ -27,3 +27,9 @@
     overflow: auto;
     max-height: 100vh;
 }
+.mouseType{
+    justify-content: space-around;
+}
+.selectMT{
+    background-color: #cac0c0;
+}

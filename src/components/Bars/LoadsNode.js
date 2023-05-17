@@ -58,25 +58,6 @@ export default function LoadsNode ({ node }) {
     
     const menu = (
         <>
-            <div className='forcesWrapper'>
-                <div onClick={() => setMoment(!moment)}>
-                    <div> Моменты <button onClick={() => dispatch(addMomentNode({id: id})) }>+</button> </div> 
-                </div>
-                {moment ? arrMoment : null}
-            </div>
-            <div className='forcesWrapper'>
-                <div >
-                    <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы <button 
-                    onClick={(e) => { dispatch(addConcentratedForcesNodes({id: id}) ) } }>+</button> </div>
-                </div>
-                {concentrated ? arrConcentrated : null}
-            </div>
-        </>
-    )
-    // dispatch(changeSupports({ id: id, value: supports}))
-    return(
-        <div>
-            <button onClick={() => setLoads(!loads) }>Узел {node.id}</button>
             <div>
                 <label> Опоры </label>
                 <div className='black'>
@@ -86,6 +67,24 @@ export default function LoadsNode ({ node }) {
                     <Icon onClick={() => {dispatch(changeSupports({ id: id, value: 'none'}))}} className={ sup == 'none' ? 'select' : '' } icon="basil:cross-outline" color="white" width="50" height="50" />
                 </div>
             </div>
+            <div className='forcesWrapper'>
+                <div onClick={() => setMoment(!moment)}>
+                    <div> Моменты <Icon onClick={() => dispatch(addMomentNode({id: id})) } icon="material-symbols:add" width="30" /> </div> 
+                </div>
+                {moment ? arrMoment : null}
+            </div>
+            <div className='forcesWrapper'>
+                <div > 
+                    <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы  <Icon onClick={() => dispatch(addConcentratedForcesNodes({id: id}) ) } icon="material-symbols:add" width="30" /></div>
+                </div>
+                {concentrated ? arrConcentrated : null}
+            </div>
+        </>
+    )
+    // dispatch(changeSupports({ id: id, value: supports}))
+    return(
+        <div>
+            <div className='nodeParams' onClick={() => setLoads(!loads) }>Узел {node.id}</div>
             {loads ? menu : null}
         </div>
     )

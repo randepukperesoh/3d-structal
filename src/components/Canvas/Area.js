@@ -9,6 +9,7 @@ import { addNode } from '../store/Slice';
 import html2canvas from "html2canvas"
 import Fluid from '../Supports/Fluid';
 
+
 export default function Area() {
     const nodes = useSelector(state => state.nodes.nodes);
     const kernels = useSelector(state => state.nodes.kernels)

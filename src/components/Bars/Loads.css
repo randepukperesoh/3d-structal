@@ -11,14 +11,14 @@ label {
     display: flex;
 }
 .kernelCard{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #17252A;
 }
 .forcesWrapper{
-    border-top: 1px solid black;
-    min-height: 50px;
+    border-bottom: 1px solid #17252A;
+    min-height: 35px;
 }
 .loadWrapper{
-    border-bottom: 1px solid black;
+    border-top: 1px solid #17252A ;
     padding: 10px 0 10px 0;   
 }
 
@@ -27,4 +27,15 @@ label {
 }
 .select{
     background-color: rgb(110, 110, 110);
+}
+.rodsLabel{
+    min-height: 40px;
+    border-bottom: 1px solid #17252A;   
+}
+.a{
+    justify-content: space-around;
+}
+.nodeParams{
+    border-top: 1px solid #17252A;
+    min-height: 30px;
 }

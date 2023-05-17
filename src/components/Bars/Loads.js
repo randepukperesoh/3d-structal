@@ -19,6 +19,7 @@ export default function Loads ({ kernel}) {
     const [ distributed, setDistributed ] = useState(true);
     const [ moment, setMoment ] = useState(false);
     const [ concentrated, setConcentrated ] = useState(true);
+    const [ droped, setDroped ] = useState(false);
 
     const arrDistributed = kernel.distributedForces.map( (forces) => {
         if (forces.value) {
@@ -97,39 +98,51 @@ export default function Loads ({ kernel}) {
             )
         
     })
+
+    const drop = <Drop id={id}/>
+    
     const menu = (
         <>
             <div className='forcesWrapper'>
-                    <Drop 
-                        id={id}
-                    />
+                <div className='flex a'>
+                    <div onClick={() => setDroped(!droped)}>
+                        Материал
+                    </div>
+                </div>
+                    { droped ? drop : null}
             </div>
             <div className='forcesWrapper'>
-                <div onClick={() => setDistributed(!distributed)}>
-                    Распределенные нагрузки
+                <div className='flex a'>
+                    <div onClick={() => setDistributed(!distributed)}>
+                        Распределенные нагрузки
+                    </div>
+                    <Icon onClick={() => dispatch(addDistributedForces({id: id})) } icon="material-symbols:add" width="30" />
                 </div>
-                <button onClick={() => dispatch(addDistributedForces({id: id})) }>+</button>
                 {distributed ? arrDistributed : null}
             </div>
             <div className='forcesWrapper'>
-                <div onClick={() => setMoment(!moment)}>
-                    <div>Моменты </div> 
+                <div className='flex a'>
+                    <div onClick={() => setMoment(!moment)}>
+                        <div>Моменты </div> 
+                    </div>
+                    <Icon onClick={() => dispatch(addMoment({id: id})) } icon="material-symbols:add" width="30" />
                 </div>
-                <button onClick={() => dispatch(addMoment({id: id})) }>+</button>
                 {moment ? arrMoment : null}
             </div>
             <div className='forcesWrapper'>
-                <div >
-                    <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы</div>
+                <div className='flex a'>
+                    <div >
+                        <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы</div>
+                    </div>
+                    <Icon onClick={() => {dispatch(addConcentratedForces({id: id}))}} icon="material-symbols:add" width="30" />
                 </div>
-                <button onClick={(e) => {dispatch(addConcentratedForces({id: id}) ) } }>+</button>
                 {concentrated ? arrConcentrated : null}
             </div>
         </>
     )
     return(
         <div>
-            <div onClick={() => setLoads(!loads) }>Стержень {id}</div>
+            <div className='rodsLabel' onClick={() => setLoads(!loads) }>Стержень {id} <Icon icon="material-symbols:arrow-drop-down" width="30" /></div>
             {loads ? menu : null}
         </div>
     )
