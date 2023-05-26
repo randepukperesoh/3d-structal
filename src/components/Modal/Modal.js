@@ -40,8 +40,8 @@ export default function Modal({setModal}) {
                     endNodeId: kernel.end,
                     crossSectionId: 0, 
                     roleId: 0,
-                    r1: true,
-                    r2: true,
+                    r1: false,
+                    r2: false,
                     lengthVal: 21
                 }
             }),
@@ -49,6 +49,18 @@ export default function Modal({setModal}) {
                 if(node.supports.type == 'fluid'){
                     return {
                     className: 'SupportFluid',
+                    boundTo: node.id,
+                    angle: 0 
+                }}
+                if(node.supports.type == 'fixed'){
+                    return {
+                    className: 'SupportFixed',
+                    boundTo: node.id,
+                    angle: 0 
+                }}
+                if(node.supports.type == 'anchorage'){
+                    return {
+                    className: 'SupportAnchorage',
                     boundTo: node.id,
                     angle: 0 
                 }}
@@ -94,9 +106,10 @@ export default function Modal({setModal}) {
                 }})
             }).flat().filter(elem => elem),
             cDistributedForces: kernels.map( kernel => {
-                return kernel.distributedForces.map( f => {
+                return kernel.distributedForces.map( (f, id) => {
                     if( !f.value ) return 
                     return{
+                        index: id,
                         boundTo: kernel.id,
                         fN1: f.loadsStart,
                         fN2: f.loadEnd,
@@ -108,8 +121,9 @@ export default function Modal({setModal}) {
             }).flat().filter(elem => elem),
             cSections: kernels.map((k, i) => {
                 return{
-                    id: 32,
+                    id: '32',
                     cross_section_standart_id: 32,
+                    cross_section_type: 1,
                     marka: "60x60x5",
                     t_s: 0.5,
                     b: 6,
@@ -190,6 +204,7 @@ export default function Modal({setModal}) {
 
         const reqOptions = {
             method: 'POST',
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)    
         };

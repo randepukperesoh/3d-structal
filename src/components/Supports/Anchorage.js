@@ -14,7 +14,7 @@ export default function Anchorage({position}){
     let cameraX = useThree().camera
     
     const ref = useRef(null)
-    console.log('Anchorage')
+    //console.log('Anchorage')
     useFrame(() => {
         ref.current.rotation.x = cameraX.rotation.x
         ref.current.rotation.y = cameraX.rotation.y

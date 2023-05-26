@@ -24,7 +24,7 @@ export default function Fixed({position}) {
         ref.current.rotation.y = cameraX.rotation.y
         ref.current.rotation.z = cameraX.rotation.z
     })
-    console.log('Fixed')
+    //console.log('Fixed')
 
     return(
         <mesh ref={ref} scale={0.05} >

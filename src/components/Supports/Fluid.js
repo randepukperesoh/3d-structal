@@ -16,7 +16,7 @@ export default function Fluid() {
     let cameraX = useThree().camera
     
     const ref = useRef(null)
-    console.log('Fluid')
+    //console.log('Fluid')
 
     useFrame(() => {
         ref.current.rotation.x = cameraX.rotation.x

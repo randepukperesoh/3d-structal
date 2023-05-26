@@ -212,7 +212,7 @@ const slice = createSlice({
             moment: [],
             physicMaterial: 1,
          },{
-            id:6,
+            id:7,
             start:1,
             end:4,
             materialId: 32,
@@ -222,7 +222,7 @@ const slice = createSlice({
             moment: [],
             physicMaterial: 1,
          },{
-            id:7,
+            id:8,
             start:4,
             end:7,
             materialId: 32,
@@ -233,7 +233,7 @@ const slice = createSlice({
             physicMaterial: 1,
          }
          ,{
-            id:8,
+            id:9,
             start:7,
             end:5,
             materialId: 32,
@@ -243,18 +243,8 @@ const slice = createSlice({
             moment: [],
             physicMaterial: 1,
          },{
-            id:9,
-            start:5,
-            end:6,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
             id:10,
-            start:1,
+            start:5,
             end:6,
             materialId: 32,
             isSelected: false,
@@ -265,7 +255,7 @@ const slice = createSlice({
          },{
             id:11,
             start:1,
-            end:7,
+            end:6,
             materialId: 32,
             isSelected: false,
             concentratedForces: [],
@@ -274,6 +264,16 @@ const slice = createSlice({
             physicMaterial: 1,
          },{
             id:12,
+            start:1,
+            end:7,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+         },{
+            id:13,
             start:6,
             end:7,
             materialId: 32,
@@ -496,6 +496,12 @@ const slice = createSlice({
         },
         changePhysicMaterial(state, action) {
             state.kernels[action.payload.id].physicMaterial = Number(action.payload.value)
+        },
+        uploadData( state, action ){
+            //console.log(action.payload.kernels)
+            //console.log(action.payload.nodes)
+            state.kernels = action.payload.kernels;
+            state.nodes = action.payload.nodes;
         }
     }
 })
@@ -511,7 +517,7 @@ export const {addNode, removeNode, changeNode, addKernel, changeConfigGridYX,
     addMomentNode, changeMomentLoadNode, changeConcentratedLoadYNode, 
     changeConcentratedLoadXNode, changeConcentratedLoadZNode, changeDivisionSize, 
     changeDivisionCount, addConcentratedForcesNodes, changeSupports, changeMaterial, 
-    changePhysicMaterial
+    changePhysicMaterial,uploadData
 } = slice.actions;
 
 export default slice.reducer;
