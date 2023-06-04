@@ -25,7 +25,7 @@ export default function Loads ({ kernel}) {
         if (forces.value) {
             return (
                 <div key={'distr'+ forces.id}  className='loadWrapper'>
-                    Нагрузка {forces.id} <Icon onClick={()=> dispatch(deleteDistributedForces({id: id, subId: forces.id}))} icon="material-symbols:delete-outline-sharp" />
+                    Нагрузка {forces.id} <Icon onClick={()=> dispatch(deleteDistributedForces({id: id, subId: forces.id}))}  icon="material-symbols:delete-outline-sharp" />
                 <div  className='flex'>
                     <label>
                         Нагрузка в начале
@@ -54,7 +54,7 @@ export default function Loads ({ kernel}) {
         if(forces.value) {
             return (
                 <div key={'moment' + forces.id}  className='loadWrapper'>
-                    Момент {forces.id} <Icon onClick={()=> dispatch(({id: id, subId: forces.id}))} icon="material-symbols:delete-outline-sharp" />
+                    Момент {forces.id} <Icon onClick={()=> dispatch(({id: id, subId: forces.id}))}  icon="material-symbols:delete-outline-sharp" />
                 <div className='flex'>
                     <label>
                         Величина
@@ -73,7 +73,7 @@ export default function Loads ({ kernel}) {
         
             return(
                 <div key={'conc' + forces.id} className='loadWrapper'>
-                    Нагрузка {forces.id} <Icon onClick={()=> dispatch(deleteConcentratedForces({id: id, subId: forces.id}))} icon="material-symbols:delete-outline-sharp" />
+                    Нагрузка {forces.id} <Icon onClick={()=> dispatch(deleteConcentratedForces({id: id, subId: forces.id}))} className='svgIcon' icon="material-symbols:delete-outline-sharp" />
                     <div className='flex'>
                         <label>
                             По оси X
@@ -116,25 +116,23 @@ export default function Loads ({ kernel}) {
                     <div onClick={() => setDistributed(!distributed)}>
                         Распределенные нагрузки
                     </div>
-                    <Icon onClick={() => dispatch(addDistributedForces({id: id})) } icon="material-symbols:add" width="30" />
+                    <Icon onClick={() => dispatch(addDistributedForces({id: id})) } className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {distributed ? arrDistributed : null}
             </div>
             <div className='forcesWrapper'>
                 <div className='flex a'>
                     <div onClick={() => setMoment(!moment)}>
-                        <div>Моменты </div> 
+                        Моменты
                     </div>
-                    <Icon onClick={() => dispatch(addMoment({id: id})) } icon="material-symbols:add" width="30" />
+                    <Icon onClick={() => dispatch(addMoment({id: id})) } className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {moment ? arrMoment : null}
             </div>
             <div className='forcesWrapper'>
                 <div className='flex a'>
-                    <div >
-                        <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы</div>
-                    </div>
-                    <Icon onClick={() => {dispatch(addConcentratedForces({id: id}))}} icon="material-symbols:add" width="30" />
+                    <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы</div>
+                    <Icon onClick={() => {dispatch(addConcentratedForces({id: id}))}} className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {concentrated ? arrConcentrated : null}
             </div>
@@ -142,7 +140,7 @@ export default function Loads ({ kernel}) {
     )
     return(
         <div>
-            <div className='rodsLabel' onClick={() => setLoads(!loads) }>Стержень {id} <Icon icon="material-symbols:arrow-drop-down" width="30" /></div>
+            <div className='rodsLabel' onClick={() => setLoads(!loads) }>Стержень {id} <Icon className='svgIcon' icon="material-symbols:arrow-drop-down" width="30" /></div>
             {loads ? menu : null}
         </div>
     )

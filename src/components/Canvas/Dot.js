@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { selectionNode, selectNode, addKernel, changeNode, changeConfigCamera, removeNode } from '../store/Slice';
+import {  selectNode, addKernel, changeNode, changeConfigCamera, removeNode } from '../store/Slice';
 import { useGesture } from '@use-gesture/react';
 import { Html } from "@react-three/drei";
 import { Icon } from '@iconify/react';
@@ -13,7 +13,6 @@ import './Dot.css';
 
 export default function Dot({ pos , id, isSelected }){
 
-    const selectedNode = useSelector( state => state.nodes.selectedNode )
     const config = useSelector( state => state.nodes.config )
     const node = useSelector( state => state.nodes.nodes[id])
 
@@ -25,9 +24,9 @@ export default function Dot({ pos , id, isSelected }){
 
     const bindDotPos = useGesture({
         onDragStart: () => config.mouseType === 'node' ?  dispatch( changeConfigCamera( { camera: false } ) ) : null,
-        onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, x: position[0], y: Math.round( -params.offset[1] / config.meshDivisions ), z: position[2]} )) : null,
+        onDrag: ( params ) => config.mouseType === 'node' ? dispatch( changeNode( {id: id, y: Math.round( -params.offset[1] / config.divisionSize )})) : null,
         onDragEnd: () => config.mouseType === 'node' ? dispatch( changeConfigCamera( { camera: true } ) ) : null,
-        onClick: (e) =>  config.mouseType === 'kernel' ? createKernel : select(e),
+        onClick: (e) =>  config.mouseType === 'kernel' ? dispatch(addKernel({id: id})) : select(e),
         onContextMenu:(e) => setContextMenu( !contextMenu )
     })
     
@@ -36,13 +35,6 @@ export default function Dot({ pos , id, isSelected }){
     function select (e){
         e.event.stopPropagation();
         dispatch( selectNode({ id: id, type: 'node', e: e} ) )
-    }
-
-    function createKernel () {
-        dispatch(selectionNode({id: id}))
-        if( (selectedNode !== id) & (selectedNode !== null) ) {
-            dispatch(addKernel({start: selectedNode.node, end: id}))
-        }
     }
 
     const contextHtml  = () => {
@@ -82,12 +74,13 @@ export default function Dot({ pos , id, isSelected }){
     
     //console.log(position, node.supports.type)
     return(
-    <mesh { ...bindDotPos() } position={ position }>
-        <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />
-        <meshStandardMaterial attach={"material"} color={ isSelected ? 'yellow' : 'blue' } />
-        { contextMenu ? contextHtml() : null }
-        {arrConcentratedForces}
-        {arrMoment}
-        {node.supports.type == 'fluid' ? <Fluid position={position}/> : node.supports.type == 'anchorage' ? <Anchorage position={position}/> : node.supports.type == 'fixed' ? <Fixed position={position}/> : null }
-    </mesh>
-)}
+        <mesh { ...bindDotPos() } position={ position }>
+            <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />
+            <meshStandardMaterial attach={"material"} color={ isSelected ? 'yellow' : 'blue' } />
+            { contextMenu ? contextHtml() : null }
+            {arrConcentratedForces}
+            {arrMoment}
+            {node.supports.type == 'SupportFluid' ? <Fluid position={position}/> : node.supports.type == 'SupportAnchorage' ? <Anchorage position={position}/> : node.supports.type == 'SupportFixed' ? <Fixed position={position}/> : null }
+        </mesh>
+    )
+}

@@ -15,7 +15,9 @@ label {
 }
 .forcesWrapper{
     border-bottom: 1px solid #17252A;
-    min-height: 35px;
+    min-height: 30px;
+    padding: 5px 0;
+    position: relative;
 }
 .loadWrapper{
     border-top: 1px solid #17252A ;
@@ -29,11 +31,24 @@ label {
     background-color: rgb(110, 110, 110);
 }
 .rodsLabel{
-    min-height: 40px;
+    vertical-align: middle;
     border-bottom: 1px solid #17252A;   
+    padding: 5px 0 5px 0;
+    height: 30px;
+    position: relative;
 }
-.a{
-    justify-content: space-around;
+.flex.a{
+    height: 30px;
+}
+.flex.a div{
+    padding: 5px 0 0 15px;
+}
+
+.svgIcon{
+    vertical-align: middle;
+    position: absolute;
+    top: 5px;
+    right: 15px;
 }
 .nodeParams{
     border-top: 1px solid #17252A;

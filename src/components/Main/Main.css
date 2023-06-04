@@ -22,9 +22,6 @@
     display: flex;
     flex-basis: 17vw;
 }
-.area{
-
-}
 .maxArea{
     min-width: 96vw;
 }
@@ -35,6 +32,7 @@
     display: flex;
     width: 100VW;
     max-height: 900px;
+    
 }
 .closeTab{
     position: absolute;

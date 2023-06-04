@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NodeBar from '../Bars/NodeBar';
-import KernelBar from '../Bars/KernelBar'
-import ParamsBar from '../Bars/ParamsBar';
 import Area from '../Canvas/Area';
 import Header from '../Header/Header';
 import SideBar from '../Bars/Sidebar';

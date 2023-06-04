@@ -21,7 +21,7 @@ export default function LoadsNode ({ node }) {
         if(forces.value) {
             return (
                 <div key={'moment' + forces.id}  className='loadWrapper'>
-                    Момент {forces.id} <Icon onClick={()=> dispatch(({id: id, subId: forces.id}))} icon="material-symbols:delete-outline-sharp" />
+                    Момент {forces.id} <Icon onClick={()=> dispatch(addMomentNode({id: id, subId: forces.id}))} icon="material-symbols:delete-outline-sharp" />
                 <div className='flex'>
                     <label>
                         Величина
@@ -61,27 +61,32 @@ export default function LoadsNode ({ node }) {
             <div>
                 <label> Опоры </label>
                 <div className='black'>
-                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'fluid'}))}} className={ sup == 'fluid' ? 'select' : '' } src='./sup_fluid.svg'/>
-                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'anchorage'}))}} className={ sup == 'anchorage' ? 'select' : '' } src='./sup_anchorage.svg'/>
-                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'fixed'}))}} className={ sup == 'fixed' ? 'select' : '' } src='./sup_fixed.svg'/>
+                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'SupportFluid'}))}} className={ sup == 'SupportFluid' ? 'select' : '' } src='./sup_fluid.svg'/>
+                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'SupportAnchorage'}))}} className={ sup == 'SupportAnchorage' ? 'select' : '' } src='./sup_anchorage.svg'/>
+                    <img onClick={() => {dispatch(changeSupports({ id: id, value: 'SupportFixed'}))}} className={ sup == 'SupportFixed' ? 'select' : '' } src='./sup_fixed.svg'/>
                     <Icon onClick={() => {dispatch(changeSupports({ id: id, value: 'none'}))}} className={ sup == 'none' ? 'select' : '' } icon="basil:cross-outline" color="white" width="50" height="50" />
                 </div>
             </div>
             <div className='forcesWrapper'>
-                <div onClick={() => setMoment(!moment)}>
-                    <div> Моменты <Icon onClick={() => dispatch(addMomentNode({id: id})) } icon="material-symbols:add" width="30" /> </div> 
+                <div className='flex a' >
+                    <div onClick={() => setMoment(!moment)}>
+                        Моменты  
+                    </div> 
+                    <Icon onClick={() => dispatch(addMomentNode({id: id})) } className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {moment ? arrMoment : null}
             </div>
             <div className='forcesWrapper'>
-                <div > 
-                    <div onClick={() => (setConcentrated(!concentrated))}>Сосредаточенные силы  <Icon onClick={() => dispatch(addConcentratedForcesNodes({id: id}) ) } icon="material-symbols:add" width="30" /></div>
+                <div className='flex a'> 
+                        <div onClick={() => (setConcentrated(!concentrated))} >
+                            Сосредаточенные силы 
+                        </div>
+                        <Icon onClick={() => dispatch(addConcentratedForcesNodes({id: id}) ) } className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {concentrated ? arrConcentrated : null}
             </div>
         </>
     )
-    // dispatch(changeSupports({ id: id, value: supports}))
     return(
         <div>
             <div className='nodeParams' onClick={() => setLoads(!loads) }>Узел {node.id}</div>

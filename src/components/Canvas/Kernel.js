@@ -48,4 +48,5 @@ export default function Kernel ({ kernel}){
             {momentRes}
             {distributedRes}
         </mesh>  
-)}
+    )
+}

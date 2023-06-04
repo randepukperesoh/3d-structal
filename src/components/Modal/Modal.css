@@ -1,17 +1,25 @@
 .modalWrapper{
-    background-color: rgb(207, 207, 207);
+    background: #a0a0a0a1;
     position: absolute;
+    pointer-events: all;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 10;
-    opacity: 0.6;
 }
 .modal{
-    background-color: white;
+    background-color: #FEFFFF;
     width: 400px;
     height: 600px;
     margin: 200px auto 0;
-    opacity: 1;
+    z-index: 11;
+}
+.modalRow{
+    height: 50px;
+    display: block;
+}
+.block{
+    display: block;
+    margin: 5px auto 5px;
 }

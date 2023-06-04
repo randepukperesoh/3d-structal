@@ -5,284 +5,63 @@ const slice = createSlice({
     initialState:{
         nodes:[ {
             id:0,
-            x: -5,
-            y: 1,
-            z: 0,
+            x: 1,
+            y: 0,
+            z: 5,
             isSelected: false,
             moment: [],
-            concentratedForces: [{
-                value: true,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
+                concentratedForces: [
+            //    {
+            //     value: true,
+            //     id: 0,
+            //     loadX: 0,
+            //     loadY: 1,
+            //     loadZ: 0 
+            //     }
+        ],
             supports:{
-                type: 'fixed'
+                type: 'SupportFixed'
             }
         },{
             id:1,
-            x: 0,
-            y: 3,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: true,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-                supports:{
-                    type: 'none'
-                }
-        },{
-            id:2,
-            x: -3,
-            y: 2,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: true,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-                supports:{
-                    type: 'none'
-                }
-        },{
-            id:3,
-            x: -2,
-            y: 1,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: false,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-                supports:{
-                    type: 'none'
-                }
-        },{
-            id:4,
-            x: 0,
-            y: 1,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: false,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-                supports:{
-                    type: 'none'
-                }
-        },{
-            id:5,
-            x: 5,
-            y: 1,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: true,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-            supports:{
-                type: 'fixed'
-            }
-        },{
-            id:6,
-            x: 3,
-            y: 2,
-            z: 0,
-            isSelected: false,
-            moment: [],
-            concentratedForces: [{
-                value: true,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
-                supports:{
-                    type: 'none'
-                }
-        },{
-            id:7,
             x: 2,
             y: 1,
             z: 0,
             isSelected: false,
             moment: [],
-            concentratedForces: [{
-                value: false,
-                id: 0,
-                loadX: 0,
-                loadY: 1,
-                loadZ: 0 
-                }],
+            concentratedForces: [
+                //{
+                //value: true,
+                //id: 0,
+                //loadX: 0,
+                //loadY: 1,
+                //loadZ: 0 
+                //}
+            ],
                 supports:{
-                    type: 'none'
+                    type: 'SupportFluid'
                 }
         }
     ],
         kernels:[ {
             id:0,
             start:0,
-            end:2,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-        },{
-            id:1,
-            start:2,
             end:1,
             materialId: 32,
             isSelected: false,
             concentratedForces: [],
-            distributedForces: [],
+            distributedForces: [{
+                value: true,
+                id: 0,
+                loadsStart: 45000,
+                loadEnd: 45000,
+                indient: false,
+                indientStart: 0,
+                indientEnd: 0
+            }],
             moment: [],
             physicMaterial: 1,
-        },{
-           id:2,
-           start:2,
-           end:3,
-           materialId: 32,
-           isSelected: false,
-           concentratedForces: [],
-           distributedForces: [],
-           moment: [],
-           physicMaterial: 1,
-        },{
-            id:3,
-            start:3,
-            end:1,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:4,
-            start:0,
-            end:3,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:5,
-            start:3,
-            end:4,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:6,
-            start:1,
-            end:4,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:7,
-            start:1,
-            end:4,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:8,
-            start:4,
-            end:7,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         }
-         ,{
-            id:9,
-            start:7,
-            end:5,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:10,
-            start:5,
-            end:6,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:11,
-            start:1,
-            end:6,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:12,
-            start:1,
-            end:7,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         },{
-            id:13,
-            start:6,
-            end:7,
-            materialId: 32,
-            isSelected: false,
-            concentratedForces: [],
-            distributedForces: [],
-            moment: [],
-            physicMaterial: 1,
-         }
+        }
     ],
         config:{
             yzGrid: false,
@@ -290,25 +69,41 @@ const slice = createSlice({
             camera: true,
             divisionSize: 10,
             divisionCount: 10,
-            mouseType: 'camera'
+            mouseType: 'kernel'
             
         },
         selectedObjects: {
             node: [],
             kernels: [1]
         },
-        selectedNode: {
-            node: null
-        }
+        forCreateKernel:{
+            start: false,
+            end: false
+        },
+        
     },
     reducers: {
         addNode(state, action) {
-            state.nodes.push({
-                id: state.nodes.at(-1) ? state.nodes.at(-1).id + 1 : 0,
-                x: action.payload.x,
-                y: 0,
-                z: action.payload.z,
-                isSelected: false
+            let isBusy = true;
+            state.nodes.map( n => {
+                if (n.x == action.payload.x & n.z == action.payload.z) {
+                    isBusy = false
+                }
+                if (isBusy) {
+                    state.nodes.push({
+                        id: state.nodes.at(-1) ? state.nodes.at(-1).id + 1 : 0,
+                        x: action.payload.x,
+                        y: 0,
+                        z: action.payload.z,
+                        isSelected: false,
+                        moment: [],
+                        concentratedForces: [],
+                        supports:{
+                            type: 'none'
+                        }
+                    })
+                    isBusy = false
+                }
             })
         },
         removeNode(state, action) {
@@ -319,19 +114,29 @@ const slice = createSlice({
             })
         },
         changeNode(state, action) {
-            state.nodes[action.payload.id - 1]= {
-                id:action.payload.id,
-                x: action.payload.x,
-                y: action.payload.y,
-                z: action.payload.z
-            }
+            state.nodes[action.payload.id].y = action.payload.y
         },
         addKernel(state, action) {
-            state.kernels.push({
-                id: state.kernels.at(-1).id + 1,
-                start: Number(action.payload.start),
-                end: Number(action.payload.end)
-            })
+            if( !state.forCreateKernel.start ) {
+                state.forCreateKernel.start = action.payload.id
+            } else {
+                state.forCreateKernel.end = action.payload.id
+                if( state.forCreateKernel.start !== state.forCreateKernel.end){
+                    state.kernels.push({
+                    id: state.kernels.at(-1).id + 1,
+                    start: Number(state.forCreateKernel.start),
+                    end: Number(state.forCreateKernel.end),
+                    materialId: 32,
+                    isSelected: false,
+                    concentratedForces: [],
+                    distributedForces: [],
+                    moment: [],
+                    physicMaterial: 1,
+                    })
+                    state.forCreateKernel.start = false;
+                    state.forCreateKernel.end = false
+                }
+            }
         },
         changeConfigGridYX( state, action) {
             state.config.yxGrid = action.payload.yxGrid;
@@ -350,9 +155,6 @@ const slice = createSlice({
         },
         changeConfigCamera ( state, action ) {
             state.config.camera = action.payload.camera;
-        },
-        selectionNode(state, action) {
-            state.selectedNode.node = action.payload.id;
         },
         selectNode( state, action ) {
             if (action.payload.e.altKey) {
@@ -498,8 +300,6 @@ const slice = createSlice({
             state.kernels[action.payload.id].physicMaterial = Number(action.payload.value)
         },
         uploadData( state, action ){
-            //console.log(action.payload.kernels)
-            //console.log(action.payload.nodes)
             state.kernels = action.payload.kernels;
             state.nodes = action.payload.nodes;
         }
