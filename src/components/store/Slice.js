@@ -5,60 +5,490 @@ const slice = createSlice({
     initialState:{
         nodes:[ {
             id:0,
-            x: 1,
+            x: -6,
             y: 0,
-            z: 5,
+            z: -3,
             isSelected: false,
             moment: [],
-                concentratedForces: [
-            //    {
-            //     value: true,
-            //     id: 0,
-            //     loadX: 0,
-            //     loadY: 1,
-            //     loadZ: 0 
-            //     }
-        ],
+                concentratedForces: [ ],
             supports:{
-                type: 'SupportFixed'
+                type: 'SupportAnchorage'
             }
         },{
             id:1,
-            x: 2,
-            y: 1,
-            z: 0,
+            x: -6,
+            y: 0,
+            z: 3,
             isSelected: false,
             moment: [],
             concentratedForces: [
-                //{
-                //value: true,
-                //id: 0,
-                //loadX: 0,
-                //loadY: 1,
-                //loadZ: 0 
-                //}
             ],
                 supports:{
-                    type: 'SupportFluid'
+                    type: 'SupportAnchorage'
+                }
+        },{
+            id:2,
+            x: 6,
+            y: 0,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'SupportAnchorage'
+                }
+        },{
+            id:3,
+            x: 6,
+            y: 0,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'SupportAnchorage'
+                }
+        }, {
+            id:4,
+            x: -6,
+            y: 4,
+            z: -3,
+            isSelected: false,
+            moment: [],
+                concentratedForces: [{
+                    value: true,
+                    id: 0 ,
+                    loadX: 0,
+                    loadY: 10,
+                    loadZ: 0,
+                    }
+        ],
+            supports:{
+                type: 'none'
+            }
+        },{
+            id:5,
+            x: -6,
+            y: 4,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:6,
+            x: 6,
+            y: 4,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:7,
+            x: 6,
+            y: 4,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:8,
+            x: -2,
+            y: 4,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:9,
+            x: 2,
+            y: 4,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:10,
+            x: -2,
+            y: 4,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:11,
+            x: 2,
+            y: 4,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:12,
+            x: 0,
+            y: 4.6,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:13,
+            x: 0,
+            y: 4.6,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:14,
+            x: 4,
+            y: 4.2,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:15,
+            x: -4,
+            y: 4.2,
+            z: -3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:16,
+            x: 4,
+            y: 4.2,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
+                }
+        },{
+            id:17,
+            x: -4,
+            y: 4.2,
+            z: 3,
+            isSelected: false,
+            moment: [],
+            concentratedForces: [{
+                value: true,
+                id: 0 ,
+                loadX: 0,
+                loadY: 10,
+                loadZ: 0,
+                }
+            ],
+                supports:{
+                    type: 'none'
                 }
         }
+
     ],
         kernels:[ {
             id:0,
             start:0,
-            end:1,
+            end:4,
             materialId: 32,
             isSelected: false,
             concentratedForces: [],
-            distributedForces: [{
-                value: true,
-                id: 0,
-                loadsStart: 45000,
-                loadEnd: 45000,
-                indient: false,
-                indientStart: 0,
-                indientEnd: 0
-            }],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        },{
+            id:2,
+            start:1,
+            end:5,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        },{
+            id:3,
+            start:2,
+            end:6,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        },{
+            id:4,
+            start:3,
+            end:7,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:5,
+            start:4,
+            end:5,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:6,
+            start:5,
+            end:6,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:7,
+            start:6,
+            end:7,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:8,
+            start:4,
+            end:7,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:9,
+            start:13,
+            end:12,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:10,
+            start:9,
+            end:13,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:11,
+            start:8,
+            end:13,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:12,
+            start:11,
+            end:12,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:13,
+            start:10,
+            end:12,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:14,
+            start:12,
+            end:6,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:15,
+            start:12,
+            end:5,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:16,
+            start:13,
+            end:4,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:17,
+            start:7,
+            end:13,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:18,
+            start:14,
+            end:16,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:19,
+            start:15,
+            end:17,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:20,
+            start:9,
+            end:11,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
+            moment: [],
+            physicMaterial: 1,
+        }, {
+            id:21,
+            start:8,
+            end:10,
+            materialId: 32,
+            isSelected: false,
+            concentratedForces: [],
+            distributedForces: [],
             moment: [],
             physicMaterial: 1,
         }

@@ -72,7 +72,7 @@ export default function Dot({ pos , id, isSelected }){
         }
     })
     
-    //console.log(position, node.supports.type)
+    let a = [2, 1 ,0]
     return(
         <mesh { ...bindDotPos() } position={ position }>
             <sphereGeometry attach={"geometry"} args={ [ 0.02, 64, 32 ] } />

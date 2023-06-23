@@ -74,9 +74,9 @@ export default function Area() {
             <Controls />
             <ambientLight intensity={0.5}/>
             <pointLight position={[10, 10, 10]}/>
-            <mesh position={[0, -0.0001, 0]} onClick={(e) => createNode(e)}>
+            {/* <mesh position={[0, -0.0001, 0]} onClick={(e) => createNode(e)}>
                 <boxGeometry attach="geometry" args={[40, 0.0001, 40]} />
-            </mesh>
+            </mesh> */}
             <GridPlane/>
             {arrNode}
             {arrKernels}

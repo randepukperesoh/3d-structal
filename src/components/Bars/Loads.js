@@ -29,11 +29,11 @@ export default function Loads ({ kernel}) {
                 <div  className='flex'>
                     <label>
                         Нагрузка в начале
-                        <input defaultValue={forces.loadsStart} onChange={(e) => dispatch(changeStartLoads({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                        <input defaultValue={forces.loadsStart} onChange={(e) => dispatch(changeStartLoads({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>Кн/м
                     </label>
                     <label>
                         Нагрузка в конце
-                        <input defaultValue={forces.loadEnd} onChange={(e) => dispatch(changeEndLoads({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                        <input defaultValue={forces.loadEnd} onChange={(e) => dispatch(changeEndLoads({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>Кн/м
                     </label>
                 </div>
                 <div className='flex'>
@@ -58,7 +58,7 @@ export default function Loads ({ kernel}) {
                 <div className='flex'>
                     <label>
                         Величина
-                        <input defaultValue={forces.load} onChange={(e) => dispatch(changeMomentLoad({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                        <input defaultValue={forces.load} onChange={(e) => dispatch(changeMomentLoad({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>Кн*м
                     </label>
                     <label>
                         Отступ
@@ -77,15 +77,15 @@ export default function Loads ({ kernel}) {
                     <div className='flex'>
                         <label>
                             По оси X
-                            <input onChange={(e) => dispatch(changeConcentratedLoadX({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadX} className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadX({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadX} className='numberInput' type={"number"}></input>Кн
                         </label>
                         <label>
                             По оси Y
-                            <input onChange={(e) => dispatch(changeConcentratedLoadY({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadY}  className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadY({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadY}  className='numberInput' type={"number"}></input>Кн
                         </label>
                         <label>
                             По оси Z
-                            <input onChange={(e) => dispatch(changeConcentratedLoadZ({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadZ}  className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadZ({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadZ}  className='numberInput' type={"number"}></input>Кн
                         </label>
                     </div>
                     <div>

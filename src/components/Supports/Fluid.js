@@ -24,7 +24,7 @@ export default function Fluid() {
         ref.current.rotation.z = cameraX.rotation.z
     })
     return(
-        <mesh ref={ref} scale={0.05} >
+        <mesh ref={ref} position={[0, -0.25 ,0.2]} scale={0.05} >
             <Line
             lineWidth={1}
             color={'black'}

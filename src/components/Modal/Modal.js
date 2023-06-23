@@ -226,7 +226,7 @@ export default function Modal({setModal}) {
 
         fetch('https://api.sapr.guru/Home/FrameElement2Node', reqOptions)
         .then( res =>  res.json()) 
-        .then( data => setResult(data))
+        .then( data => console.log(data))//setResult(data))
 
     }
 
@@ -240,13 +240,6 @@ export default function Modal({setModal}) {
                         <option value='1'>Нет</option>
                     </select>
                 </div>
-                
-                {/* <div> labelDiagramValue </div> */}
-                {/* <div> Тип отчета </div> 
-                <select onChange={(e)=> console.log(e.target.value)}>
-                    <option value='0'>Классический</option>
-                    <option value='1'>СП 16.13330</option>
-                </select>  */}
                 <div className='modalRow'>
                     <button onClick={() => createJSON()}>Расчитать</button>
                     {result ? <a href={'https://api.sapr.guru/Home/Download?file=' + result.report.fileName}>Скачать отчет</a> : null}
@@ -255,3 +248,9 @@ export default function Modal({setModal}) {
         </div>
     )
 }
+{/* <div> labelDiagramValue </div> */}
+                {/* <div> Тип отчета </div> 
+                <select onChange={(e)=> console.log(e.target.value)}>
+                    <option value='0'>Классический</option>
+                    <option value='1'>СП 16.13330</option>
+                </select>  */}

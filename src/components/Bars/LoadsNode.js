@@ -25,7 +25,7 @@ export default function LoadsNode ({ node }) {
                 <div className='flex'>
                     <label>
                         Величина
-                        <input defaultValue={forces.load} onChange={(e) => dispatch(changeMomentLoadNode({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>
+                        <input defaultValue={forces.load} onChange={(e) => dispatch(changeMomentLoadNode({id: id, subId: forces.id, value: e.target.value}))} className='numberInput' type={"number"}></input>Кн
                     </label>
                 </div>
                 </div>
@@ -40,15 +40,15 @@ export default function LoadsNode ({ node }) {
                     <div className='flex'>
                         <label>
                             По оси X
-                            <input onChange={(e) => dispatch(changeConcentratedLoadXNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadX} className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadXNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadX} className='numberInput' type={"number"}></input>Кн
                         </label>
                         <label>
                             По оси Y
-                            <input onChange={(e) => dispatch(changeConcentratedLoadYNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadY}  className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadYNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadY}  className='numberInput' type={"number"}></input>Кн
                         </label>
                         <label>
                             По оси Z
-                            <input onChange={(e) => dispatch(changeConcentratedLoadZNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadZ}  className='numberInput' type={"number"}></input>
+                            <input onChange={(e) => dispatch(changeConcentratedLoadZNode({id:id, subId: forces.id, load: e.target.value}))} defaultValue={forces.loadZ}  className='numberInput' type={"number"}></input>Кн
                         </label>
                     </div>
                 </div>
