@@ -8,18 +8,21 @@ import { changeDistributedForces, changeDistributedIndientStart,
     addMoment, deleteConcentratedForces, deleteDistributedForces } from '../store/Slice';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
-import Drop from './Drop';
+import DropSection from './DropSection';
+import DropMaterial from './DropMaterial';
 
 export default function Loads ({ kernel}) {
     
     const dispatch = useDispatch();
+    console.log(kernel)
     const id = kernel.id;
 
     const [ loads, setLoads ] = useState(true);
     const [ distributed, setDistributed ] = useState(true);
     const [ moment, setMoment ] = useState(false);
     const [ concentrated, setConcentrated ] = useState(true);
-    const [ droped, setDroped ] = useState(false);
+    const [ material, setMaterial ] = useState(false);
+    const [ section, setSection ] = useState(false);
 
     const arrDistributed = kernel.distributedForces.map( (forces) => {
         if (forces.value) {
@@ -99,17 +102,23 @@ export default function Loads ({ kernel}) {
         
     })
 
-    const drop = <Drop id={id}/>
-    
     const menu = (
         <>
             <div className='forcesWrapper'>
                 <div className='flex a'>
-                    <div onClick={() => setDroped(!droped)}>
+                    <div onClick={() => setSection(!section)}>
+                        Сечения
+                    </div>
+                </div>
+                    { section ? <DropSection id={id}/> : null}
+            </div>
+            <div className='forcesWrapper'>
+                <div className='flex a'>
+                    <div onClick={() => setMaterial(!material)}>
                         Материал
                     </div>
                 </div>
-                    { droped ? drop : null}
+                    { material ? <DropMaterial id={id} /> : null}
             </div>
             <div className='forcesWrapper'>
                 <div className='flex a'>
@@ -125,7 +134,7 @@ export default function Loads ({ kernel}) {
                     <div onClick={() => setMoment(!moment)}>
                         Моменты
                     </div>
-                    <Icon onClick={() => dispatch(addMoment({id: id})) } className='svgIcon' icon="material-symbols:add" width="30" />
+                    <Icon onClick={() => dispatch(addMoment({id: kernel.id})) } className='svgIcon' icon="material-symbols:add" width="30" />
                 </div>
                 {moment ? arrMoment : null}
             </div>

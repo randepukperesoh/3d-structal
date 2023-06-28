@@ -696,6 +696,7 @@ const slice = createSlice({
             )
         },
         addMoment(state, action){
+            console.log(action.payload)
             state.kernels[action.payload.id].moment.push(
                 {
                     value: true,
