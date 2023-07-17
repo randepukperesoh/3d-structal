@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Dropdown from "react-dropdown";
 import { useDispatch} from 'react-redux'
-import { changeMaterial, changePhysicMaterial } from '../store/Slice';
-import DropdownTreeSelect from 'react-dropdown-tree-select'
-import 'react-dropdown-tree-select/dist/styles.css'
+import Select from 'react-select';
+import { changeMaterial } from '../store/Slice';
 import './Drop.css'
 
 
@@ -70,24 +68,12 @@ export default function DropSection({ id }) {
     return { label: data.marka, value: data.id}
   })
 
-    // Онченджи
-  const onChangeSectionType = (currentNode, selectedNodes) => {
-    setSectionTypeID(selectedNodes[0].value);
-  }
-
-  const onChangeSectionStandart = (currentNode, selectedNodes) => {
-    setSectionStandartId(selectedNodes[0].value);
-  }
-
-  const onChangeSectionParametrs = (currentNode, selectedNodes) => {
-    dispatch(changeMaterial({value: selectedNodes[0].value}))
-  }
-
+  console.log(dataSectionType)
   return (
     <div className="center">
-      <DropdownTreeSelect simpleSelect={true} onChange={onChangeSectionType} data={dataSectionType} />
-      {dataSectionStandart ? <DropdownTreeSelect onChange={onChangeSectionStandart} data={dataSectionStandart} /> : null}
-      {dataSectionParametrs ? <DropdownTreeSelect onChange={onChangeSectionParametrs} data={dataSectionParametrs} /> : null}
+      <Select onChange={(e) => setSectionTypeID(e.value)} options={dataSectionType}/>
+      <Select onChange={(e) => setSectionStandartId(e.value)} options={dataSectionStandart}/>
+      <Select onChange={(e) => dispatch(changeMaterial({value: e.value, id: id}))} options={dataSectionParametrs}/>
       </div>
   );
 }

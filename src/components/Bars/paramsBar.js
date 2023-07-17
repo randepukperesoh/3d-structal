@@ -24,10 +24,7 @@ export default function ParamsBar() {
         let reader = new FileReader();
         reader.onload = function(){
             let text = JSON.parse(reader.result);
-            //console.log(text)
-            //setText(JSON.parse(reader.result))
             dispatch(uploadData({ nodes: text.nodes, kernels: text.kernels}))
-            //console.log(reader.result.substring(0, 200));
         };
         reader.readAsText(input.files[0]);
   };

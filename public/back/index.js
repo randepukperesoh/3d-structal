@@ -46,16 +46,3 @@ app.get('/getMaterialPhysic', (req, res) => {
   })
 })
 
-// pool.query("select * FROM Sortament", (err, res) => {
-//     if(err) console.log(err);
-//     //console.log(res)
-//     //res.send()
-// })
-
-//const defaultsMaterials = [
-//  {title: lang('Сталь углеродистая'), E: 200e9, nu: 0.5, ro: 7850, gamma: 7850 * 9.80666, sigmaMax: 240, tauMax: 140, overload: 5, measures: { ro: 'k_g/m^3', gamma: 'N/m^3', E: 'Pa' }, rY: 240, rYn: 245, rU: 360},
-//  {title: lang('Сталь высокопрочная'), E: 210e9, nu: 0.3, ro: 7580, gamma: 7580 * 9.80666, sigmaMax: 240, tauMax: 140, overload: 5, measures: { ro: 'k_g/m^3', gamma: 'N/m^3', E: 'Pa' }},
-//  {title: lang('Медь (прокат)'), E: 110e9, nu: 0.31, ro: 8960, gamma: 8960 * 9.80666, sigmaMax: 240, tauMax: 140, overload: 5, measures: { ro: 'k_g/m^3', gamma: 'N/m^3', E: 'Pa' }},
-//  {title: lang('Алюминий (прокат)'), E: 69e9, nu: 0.32, ro: 2680, gamma: 2680 * 9.80666, sigmaMax: 240, tauMax: 140, overload: 5, measures: { ro: 'k_g/m^3', gamma: 'N/m^3', E: 'Pa' }},
-//  {title: lang('Цинк (прокат)'), E: 84e9, nu: 0.27, ro: 7130, gamma: 7130 * 9.80666, sigmaMax: 240, tauMax: 140, overload: 5, measures: { ro: 'k_g/m^3', gamma: 'N/m^3', E: 'Pa' }},
-//];
