@@ -1,3 +1,6 @@
-a web application for building spatial rod structures in three-dimensional space, analogous to SkyCiv.
+Веб приложение для построения пространственных стержневых конструкций. 
 
-there is a database file and a back-end in the public folder
+Создал 3D пространство с визуализцией конструкции, возможностью визуально редактировать модель, для хранения модели использовал стейт менеджер Redux, для создание визуализации использовал ReactThreeFiber и ThreeJs.
+Так же написал небольшой beck-end использовал nodeJs express MySql. 
+В приложение есть возможность задавать параметры конструкции и отправлять на сторонний сервис для расчета, после чего сказать отчет.
+backend хранятся в папке publick.
